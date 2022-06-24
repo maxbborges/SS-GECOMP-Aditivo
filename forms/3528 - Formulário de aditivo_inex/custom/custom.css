@@ -1,0 +1,58 @@
+.panel-info .panel-heading {
+    background: #002060 !important;
+}
+
+.panel-info .panel-heading a{
+    color: white;
+}
+
+.panel-info .panel-heading ::after{
+    color: white !important;
+}
+
+.panel.panel-info{
+    border-color: #002060;
+}
+
+form label.required:after{
+    color: #FF0000;
+    content: " *";
+}
+
+form button.required:after{
+    color: #FF0000;
+    content: " *";
+}
+
+#btn_carregarAssinante_15,#btn_incluirAssinante_15,#btn_CarregarProceso_00{
+    margin-top: 25px;
+}
+
+p{
+    text-align: center;
+    background-color: #002060;
+    color: white;
+    margin-top: 10px;
+}
+
+.colunaP{
+    padding-top: 10px;
+}
+
+div#div_24 td.col-sm-1{
+    text-align: center;
+}
+
+div#div_24 td.col-sm-1 input{
+    margin-top: 25px;
+}
+
+td {
+    border-top: solid !important;
+    padding-right: 28px !important;
+}
+
+.row-btns{
+    text-align: center;
+    margin-top: 15px;
+}

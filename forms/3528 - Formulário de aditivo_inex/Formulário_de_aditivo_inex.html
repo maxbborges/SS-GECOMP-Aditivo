@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css">
+	<script type="text/javascript" src="/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js"></script>
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js" charset="utf-8"></script>
+	<link href="/style-guide/css/fluig-style-guide-filter.min.css" rel="stylesheet" type="text/css">
+	<link href="/style-guide/css/fluig-style-guide-ratingstars.min.css" rel="stylesheet" type="text/css">
+	<script src="/style-guide/js/fluig-style-guide-filter.min.js"></script>
+	<script src="/style-guide/js/fluig-style-guide-ratingstars.min.js"></script>
+	<link href='/webdesk/customresources?cid=1&resourceName=temaFormulario/0.css' type='text/css' rel='stylesheet' />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
+	<link href='./custom/custom.css' type='text/css' rel='stylesheet' />
+	<script type="text/javascript" src="./custom/attachments.js"></script>
+	<script type="text/javascript" src="./custom/custom.js"></script>
+	<script type="text/javascript" src="./custom/activities.js"></script>
+
+</head>
+
+<body class="fluig-style-guide">
+
+	<form class="totvs-form grid vertical create-form-components ui-sortable t0" name="createFormComponents"
+		style="padding-left: 10px; padding-right: 10px;">
+		<h1 class="title-form-application">Aditivo</h1>
+		<div class="paragraph-is-required system-message-information alert alert-info" role="alert">Todos os campos com
+			* são de preenchimento obrigatório.</div>
+		<input type="hidden" class="form-control" name="txt_codFilialAnterior" value="" placeholder="" data-size="big"
+			readonly>
+		<input type="hidden" class="form-control" name="txt_nContratoAnterior" value="" placeholder="" data-size="big"
+			readonly>
+		<input type="hidden" class="form-control" name="txt_nrPasta" value="8657" placeholder="" data-size="big"
+			readonly>
+
+
+
+
+		<input type="hidden" class="form-control" name="txt_CN9_VIGE" value="" placeholder="" data-size="big" readonly>
+		<input type="hidden" class="form-control" name="txt_CN9_UNVIGE" readonly>
+		<input type="hidden" class="form-control" name="txt_zf_indice" readonly>
+		<input type="hidden" class="form-control" name="txt_zf_grupoAprovador" readonly>
+		<!-- DIV 00 - JUNTAR PROCESSOS -->
+		<div class="panel panel-info" id="div_00">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_00"
+						data-target="#aditivo_processo" href="#aditivo_processo">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Associar aditivo a um processo
+					</a>
+				</h3>
+			</div>
+			<div id="aditivo_processo" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-group">
+						<div class="col-sm-2">
+							<label>Processo Atual:</label>
+							<input type="text" class="form-control" name="txt_nProc" value="" placeholder=""
+								data-size="big" readonly>
+						</div>
+						<div class="col-sm-2">
+							<label class="required">Processo Anterior:</label>
+							<input type="number" class="form-control" name="txt_nProcAnterior" value=""
+								placeholder="Digite o número do processo anterior" data-size="big">
+						</div>
+						<div class="col-sm-2 col-btn">
+							<button type="button" class="btn btn-info required" id='btn_CarregarProceso_00'>Buscar</button>
+						</div>
+						<div class="col-sm-6">
+							<label class="required">Fornecedor</label>
+							<select class="form-control" name="slc_fornecedor_associar" id='slc_fornecedor_associar'>
+								<option value="" disabled selected>Selecione um fornecedor</option>
+							</select>
+							<input type="text" class="form-control" name="txt_fornecedor_associar_00"
+								id='txt_fornecedor_associar_00' value="" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 01 - SOLICITANTE - CONSULTAR O FORNECEDOR -->
+		<div class="panel panel-info" id="div_01">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_01"
+						data-target="#consultar_fornecedor" href="#consultar_fornecedor">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Consultar o Fornecedor
+					</a>
+				</h3>
+			</div>
+			<div id="consultar_fornecedor" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="row form-group">
+								Deverá ser anexo em um único arquivo no formato PDF o documento de consulta ao
+								fornecedor e a resposta da empresa. Este arquivo deverá ter no máximo 10 Megabytes.
+							</div>
+						</div>
+						<div class="col-sm-8">
+							<div class="row form-input">
+								<div class="col-sm-12">
+									<label class='required'>Observações</label>
+									<textarea class="form-control" rows="3" name="atxt_observacoes_01"></textarea>
+								</div>
+							</div>
+							<div class="row row-btns">
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info required" id="btn_anexar_01">Anexar
+										Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_download_01">Download do
+										Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_visualizar_01">Visualizar
+										Arquivo</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_01" id="txt_nomeArquivo_01" readonly>
+					<input type="hidden" class="form-control" name="txt_idDoc01" readonly>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 02 - SOLICITANTE - ELABORAR NOTA TÉCNICA -->
+		<div class="panel panel-info" id="div_02">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_02"
+						data-target="#elaborar_nota_tecnica" href="#elaborar_nota_tecnica">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Elaborar nota Técnica
+					</a>
+				</h3>
+			</div>
+			<div id="elaborar_nota_tecnica" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_entidade_02">
+								<div class="form-input">
+									<div class="form-group">
+										<label class="required">Selecione a Entidade</label>
+										<div class="radio-options">
+											<div class="radio">
+												<label><input type="radio" name="rd_entidade_02"
+														value="SEST">SEST</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" name="rd_entidade_02"
+														value="SENAT">SENAT</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_tipoContratacao_02">
+								<div class="form-input">
+									<label class="required">Qual o tipo de contratação?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_tipoContratacao_02"
+													value="Servico Continuo">Serviço Contínuo</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_tipoContratacao_02"
+													value="Contrato por Escopo">Contrato por Escopo</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-input">
+								<label class="required">Haverá a necessidade de fazer pesquisa de preço?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_pesquisaPreco_02" value="Sim">Sim
+											(GECOMP)</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_pesquisaPreco_02" value="Nao">Não
+											(ASSJUR)</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row form-input">
+						<div class="col-sm-3">
+							<label class="required">Esta alteração refere-se a:</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_alteracaoReferente_02" value="todos">Todos os
+										itens do contrato</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_alteracaoReferente_02" value="Um ou varios">Um
+										ou vários itens</label>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir este campo somente se o item “Um ou vários itens” for selecionado.  -->
+						<div class="col-sm-9">
+							<label class="">Descreva o(s) item(ns) a ser(em) alterado(s)</label>
+							<textarea class="form-control" rows="3" name="atxt_itensAlterados" placeholder=""
+								data-size="big" readonly></textarea>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col-sm-12 colunaP'>
+							<p><b>Quais serão as alterações Contratuais?</b></p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_vigencia_02">
+								<div class="form-input">
+									<label class="required">Prazo de vigência:</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_vigencia_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_vigencia_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label>Data início</label>
+								<input type="text" class="form-control date" name="txt_vigencia_inicio" value=""
+									placeholder="" data-size="big" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label>Data final</label>
+								<input type="text" class="form-control date" name="txt_vigencia_fim" value=""
+									placeholder="" data-size="big" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<div class="col-sm-3 form-input">
+							<label class="">Informe a nova data final</label>
+							<input type="input" class="form-control date" name="txt_vigencia_novo"
+								id="txt_vigencia_novo" value="" placeholder="" data-size="big">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_execucao_02">
+								<div class="form-input">
+									<label class="required">Prazo de Excecução</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_execucao_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_execucao_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### PROTHEUS -->
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label>Data início</label>
+								<input type="text" class="form-control date" name="txt_execucao_inicio">
+							</div>
+						</div>
+						<!-- ### PROTHEUS -->
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label>Data final</label>
+								<input type="text" class="form-control date" name="txt_execucao_fim">
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<div class="col-sm-3 form-input">
+							<label class="">Informe a nova data final</label>
+							<input type="text" class="form-control date" name="txt_execucao_nova" id="txt_execucao_nova"
+								readonly>
+						</div>
+					</div>
+					<!-- ### PROTHEUS -->
+					<div class="row form-input">
+						<div class="col-sm-6">
+							<label>Valor inicial:</label>
+							<input type="text" class="form-control money" name="txt_valor_inicial" readonly>
+						</div>
+						<div class="col-sm-6">
+							<label class="required">Valor final</label>
+							<input type="text" class="form-control money" name="txt_valor_atual" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_acrescimo_02">
+								<div class="form-input">
+									<label class="required">Acrescimo?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_acrescimo_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_acrescimo_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Mascara: 13,25 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o percentual de acréscimento</label>
+								<input type="text" class="form-control" name="txt_percentualAcrescimo_02" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 999.999.999,99 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o novo valor do contrato</label>
+								<input type="text" class="form-control" name="txt_ValorAcrescimo_02" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_supressao_02">
+								<div class="form-input">
+									<label class="required">Supressão?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_supressao_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_supressao_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Mascara: 13,25 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o percentual de supressão</label>
+								<input type="text" class="form-control" name="txt_percentualSupressao_02" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 999.999.999,99 -->
+						<div class="col-sm-5">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_valorSupressao_02">
+								<div class="form-input">
+									<label class="">Informe o novo valor do contrato</label>
+									<input type="text" class="form-control" name="txt_valorSupressao_02" readonly>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-input">
+								<label class="required">Reajuste?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_reajuste_02" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_reajuste_02" value="Nao" checked>Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 13,25 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o percentual de reajuste</label>
+								<input type="text" class="form-control" name="txt_percentualReajuste_02" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 999.999.999,99 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o novo valor do contrato</label>
+								<input type="text" class="form-control" name="txt_valorReajuste_02" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-input">
+								<label class="required">Repactuação?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_repactuacao_02" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_repactuacao_02" value="Nao"
+												checked>Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara:13,25 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o percentual de repactuacao</label>
+								<input type="text" class="form-control" name="txt_percentualRepactuacao_02" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 999.999.999,99 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o novo valor do contrato</label>
+								<input type="text" class="form-control" name="txt_valorRepactuacao_02" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_revisao_02">
+								<div class="form-input">
+									<label class="required">Revisão?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_revisao_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_revisao_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 13,25 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o percentual de reajuste</label>
+								<input type="text" class="form-control" name="txt_percentualRevisao_02" readonly>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<!-- ### Máscara: 999.999.999,99 -->
+						<div class="col-sm-5">
+							<div class="form-input">
+								<label class="">Informe o novo valor do contrato</label>
+								<input type="text" class="form-control" name="txt_valorRevisao_02" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_outros_02">
+								<div class="form-input">
+									<label class="required">Outros?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_outros_02" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_outros_02" value="Nao"
+													checked>Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
+						<div class="col-sm-10">
+							<div class="form-field" data-type="atxt_outrosJustificativa_02" data-show-properties=""
+								data-field-name="textarea3">
+								<div class="form-input">
+									<label class="">Justificativa</label>
+									<textarea class="form-control" rows="3" name="atxt_outrosJustificativa_02"
+										placeholder="" data-size="big" readonly></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p><b>Informações orçamentarias SEST:</b></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_projeto_02">
+								<div class="form-input">
+									<label class='required'>Projeto</label>
+									<input type="text" class="form-control" name="txt_projeto_02" value=""
+										placeholder="" data-size="big">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_programa_02">
+								<div class="form-input">
+									<label class='required'>Programa</label>
+									<input type="text" class="form-control" name="txt_programa_02" value=""
+										placeholder="" data-size="big">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_subprograma_02">
+								<div class="form-input">
+									<label class='required'>Subprograma</label>
+									<input type="text" class="form-control" name="txt_subprograma_02" value=""
+										placeholder="" data-size="big">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_centroCusto_02">
+								<div class="form-input">
+									<label class='required'>Centro de Custo</label>
+									<input type="text" class="form-control" name="txt_centroCusto_02" value=""
+										placeholder="" data-size="big">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-field" data-type="textbox" data-show-properties=""
+								data-field-name="txt_gpOrcamento_02">
+								<div class="form-input">
+									<label class='required'>Grupo Orçamento</label>
+									<input type="text" class="form-control" name="txt_gpOrcamento_02" value=""
+										placeholder="" data-size="big">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row row-btns">
+						<div class="col-sm-12">
+							<button type="button" class="btn btn-info" id="btn_Incluir_02">Incluir Registro</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p>Tabela de registros</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-field" data-type="tabledetail" data-show-properties=""
+							data-field-name="tbl_notaTecnica_02">
+							<div class="form-input">
+								<table tablename="tbl_notaTecnica_02" class="table" noaddbutton="true">
+									<thead>
+										<tr class="tableHeadRow">
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="tableBodyRow">
+											<td>
+												<div class="row form-input">
+													<div class="col-sm-3">
+														<label>Entidade</label>
+														<input type="text" name="column1_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3">
+														<label>Item do Contrato</label>
+														<input type="text" name="column2_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3">
+														<label>Tipo de Contratação</label>
+														<input type="text" name="column3_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3">
+														<label>Necessário pesquisa?</label>
+														<input type="text" name="column4_1" class="form-control"
+															readonly>
+													</div>
+												</div>
+												<div class="row form-input">
+													<div class="col-sm-12">
+														<label>Modificações</label>
+														<textarea class="form-control" name="column5_1"
+															class="form-control" readonly></textarea>
+													</div>
+												</div>
+												<div class="row form-input">
+													<div class="col-sm-2">
+														<label>Projeto</label>
+														<input type="text" name="column6_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2">
+														<label>Programa</label>
+														<input type="text" name="column7_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2">
+														<label>Subprograma</label>
+														<input type="text" name="column8_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3">
+														<label>Centro de Custo</label>
+														<input type="text" name="column9_1" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3">
+														<label>Grupo Orçamentario</label>
+														<input type="text" name="column10_1" class="form-control"
+															readonly>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row">
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-info">Anexar Arquivo</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-info">Download do Arquivo</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-info">Visualizar Arquivo</button>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info" id="div_27">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_27"
+						data-target="#anexarNotaTecnica" href="#anexarNotaTecnica">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Anexar nota técnica - SOLICITANTE
+					</a>
+				</h3>
+			</div>
+			<div id="anexarNotaTecnica" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="row ">
+								<div class="col-sm-12 form-input">
+									<label>Observações</label>
+									<textarea class="form-control" rows="3" name="atxt_observacoes_27" placeholder=""
+										data-size="big"></textarea>
+								</div>
+							</div>
+							<div class="row row-btns">
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_anexar_27">Anexar
+										Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_download_27">Download do
+										Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_visualizar_27">Visualizar
+										Arquivo</button>
+								</div>
+								<!-- <div class="col-sm-4">
+									<button type="button" class="btn btn-info" id="btn_ass_notaTecnica">Enviar Para Assinatura</button>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_27" id="txt_nomeArquivo_27" readonly>
+					<input type="hidden" class="form-control" name="txt_idDoc27" readonly>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 03 - SOLICITANTE - APROVAR SOLICITAÇÃO DE ADITIVO -->
+		<div class="panel panel-info" id="div_03">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_03"
+						data-target="#ap_solicitacao_aditivo" href="#ap_solicitacao_aditivo">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovar solicitação de aditivo
+					</a>
+				</h3>
+			</div>
+			<div id="ap_solicitacao_aditivo" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_apAditivo_03">
+								<div class="form-input">
+									<label class="required">Aprovado?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_apAditivo_03" value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_apAditivo_03" value="Nao">Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-field" data-type="textarea" data-show-properties=""
+										data-field-name="atxt_observacoes_03">
+										<div class="form-input">
+											<label>Observação</label>
+											<textarea class="form-control" rows="3" name="atxt_observacoes_03"
+												placeholder="" data-size="big"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info">Anexar Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-info">Visualizar Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<button type="button" class="btn btn-info" id="btn_ass_notaTecnica">Enviar Para Assinatura</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 04 - SOLICITANTE - ANALISAR VANTAJOSIDADE -->
+		<div class="panel panel-info" id="div_04">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_04"
+						data-target="#an_vantajosidade" href="#an_vantajosidade">
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Analisar vantajosidade
+					</a>
+				</h3>
+			</div>
+			<div id="an_vantajosidade" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_anVantajosidade_04">
+								<div class="form-input">
+									<label class="required">Manter o Contrato atual é mais vantajoso?</label>
+									<div class="radio-options">
+										<div class="radio">
+											<label><input type="radio" name="rd_anVantajosidade_04"
+													value="Sim">Sim</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" name="rd_anVantajosidade_04"
+													value="Nao">Não</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-field" data-type="textarea" data-show-properties=""
+										data-field-name="atxt_anVantajosidade_04">
+										<div class="form-input">
+											<div class="form-group">
+												<label>Observação</label>
+												<textarea class="form-control" rows="3" name="atxt_anVantajosidade_04"
+													placeholder="" data-size="big"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Visualizar Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 05 - SOLICITANTE - APROVAR VANTAJOSIDADE -->
+		<div class="panel panel-info" id="div_05">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_05"
+						data-target="#ap_vantajosidade" href="#ap_vantajosidade">
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovar vantajosidade
+					</a>
+				</h3>
+			</div>
+			<div id="ap_vantajosidade" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_apVantajosidade_05">
+								<div class="form-input">
+									<div class="form-group">
+										<label class="required">Necessário Ajustes?</label>
+										<div class="radio-options">
+											<div class="radio">
+												<label><input type="radio" name="rd_apVantajosidade_05"
+														value="Sim">Sim</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" name="rd_apVantajosidade_05"
+														value="Nao">Não</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-field" data-type="textarea" data-show-properties=""
+										data-field-name="atxt_apVantajosidade_05">
+										<div class="form-input">
+											<div class="form-group">
+												<label>Observação</label>
+												<textarea class="form-control" rows="3" name="atxt_apVantajosidade_05"
+													placeholder="" data-size="big"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 
+							<div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Visualizar Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 06 - COMPRAS - FAZER PESQUISA DE PREÇO -->
+		<div class="panel panel-info" id="div_06">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_06"
+						data-target="#fazer_pesquisa_preco" href="#fazer_pesquisa_preco">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Fazer a pesquisa de preço
+					</a>
+				</h3>
+			</div>
+			<div id="fazer_pesquisa_preco" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body form-input">
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="required">Necessário Ajuste?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_necAjuste_06" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_necAjuste_06" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9 ">
+							<label>Observação</label>
+							<textarea class="form-control" rows="3" name="atxt_necAjuste_06" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="required">CNPJ</label>
+							<input type="text" class="form-control" name="txt_cnpj_06" value="" placeholder=""
+								data-size="big">
+						</div>
+						<div class="col-sm-3">
+							<label class="required">Razão Social</label>
+							<input type="text" class="form-control" name="txt_razaoSocial_06" value="" placeholder=""
+								data-size="big">
+						</div>
+						<div class="col-sm-3">
+							<label class="required">Unitário</label>
+							<input type="text" class="form-control" name="txt_ValUnitario_06" value="" placeholder=""
+								data-size="big">
+						</div>
+						<div class="col-sm-3">
+							<label class="required">Total</label>
+							<input type="text" class="form-control" name="txt_valorTotal_06" value="" placeholder=""
+								data-size="big">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Descrição do objeto:</label>
+							<textarea class="form-control" rows="3" name="atxt_descricao_06" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<!-- <div class="col-sm-4">
+							<button type="button" class="btn btn-info">Anexar Arquivo</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-info">Download do Arquivo</button>
+						</div> -->
+						<div class="col-sm-12 row-btns">
+							<button type="button" class="btn btn-info" id="btn_incluir_06">Incluir Pesquisa de
+								preço</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table tablename="tbl_pesquisa_06" class="table" noaddbutton="true">
+								<thead>
+									<tr class="tableHeadRow">
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tableBodyRow">
+										<td>
+											<div class='row'>
+												<div class='col-sm-3'>
+													<label>CNPJ</label>
+													<input type="text" name="column1_2" class="form-control" readonly>
+												</div>
+												<div class='col-sm-3'>
+													<label>Razão Social</label>
+													<input type="text" name="column2_2" class="form-control" readonly>
+												</div>
+												<div class='col-sm-3'>
+													<label>Unitário</label>
+													<input type="text" name="column3_2" class="form-control" readonly>
+												</div>
+												<div class='col-sm-3'>
+													<label>Total</label>
+													<input type="text" name="column4_2" class="form-control" readonly>
+												</div>
+											</div>
+											<div class='row'>
+												<div class='col-sm-12 form-input'>
+													<label>Descricao</label>
+													<textarea class="form-control" rows="3" name="column5_2"
+														placeholder="" data-size="big" readonly></textarea>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 07 - SOLICITANTE - FAZER NOTA TECNICA -->
+		<div class="panel panel-info" id="div_07">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_07"
+						data-target="#fazerNotaTecnica" href="#fazerNotaTecnica">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Fazer a nota técnica - COMPRAS
+					</a>
+				</h3>
+			</div>
+			<div id="fazerNotaTecnica" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-2">
+							<label class="required">Necessário Ajuste?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_necAjuste_07" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_necAjuste_07" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label>Motivo Ajute</label>
+							<textarea class="form-control" rows="3" name="atxt_mtvAjuste_07" placeholder=""
+								data-size="big"></textarea>
+						</div>
+						<div class="col-sm-2">
+							<label class="required">É mais economico?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_maisEconomico_07" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_maisEconomico_07" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label>Justificativa</label>
+							<textarea class="form-control" rows="3" name="atxt_mtvMenosEconomico_07" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-input">
+								<label>Descrição do Objeto</label>
+								<textarea class="form-control" rows="3" name="atxt_notaTecnica_07" placeholder=""
+									data-size="big"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row row-btns">
+						<div class="col-sm-4">
+							<button type="button" id="btn_anexar_07" class="btn btn-info">Anexar Arquivo</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" id="btn_download_07" class="btn btn-info">Download do
+								Arquivo</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" id="btn_visualizar_07" class="btn btn-info">Visualizar
+								Arquivo</button>
+						</div>
+					</div>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_07" id="txt_nomeArquivo_07" readonly>
+					<input type="hidden" class="form-control" name="txt_idDoc07" readonly>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info" id="div_28">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_28" data-target="#ap_gerencia"
+						href="#ap_gerencia">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovação Gerência
+					</a>
+				</h3>
+			</div>
+			<div id="ap_gerencia" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-3">
+							<label>Aprovado?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_apGerencia_28" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_apGerencia_28" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class='form-input'>
+								<label>OBS</label>
+								<textarea class="form-control" rows="3" name="atxt_apGerencia_28" placeholder=""
+									data-size="big"></textarea>
+								<div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-info" id="btn_ass_novaNotaTecnica">Enviar Para Assinatura</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 08 - SOLICITANTE - DISTRIBUIR PROCESSO -->
+		<div class="panel panel-info" id="div_08">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_08"
+						data-target="#distribuir_processo" href="#distribuir_processo">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Distribuir Processo
+					</a>
+				</h3>
+			</div>
+			<div id="distribuir_processo" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-input">
+								<label>Justificativa</label>
+								<textarea class="form-control" rows="3" name="atxt_justificativa_08" placeholder=""
+									data-size="big"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 09 - JURIDICO - APROVAR ANÁLISE PRÉVIA -->
+		<div class="panel panel-info" id="div_09">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_09"
+						data-target="#ap_analise_previa" href="#ap_analise_previa">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovar análise prévia
+					</a>
+				</h3>
+			</div>
+			<div id="ap_analise_previa" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-2">
+							<label class="required">Os documentos são suficientes para a análise do
+								aditivo?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_apAnalise_09" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_apAnalise_09" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="">Para qual etapa?</label>
+							<select class="form-control" name="cb_responsaval_09">
+								<option value="" selected>Selecione a etapa</option>
+								<option value="PDP">Fazer a pesquisa de preço</option>
+								<option value="NT">Fazer a nota técnica</option>
+								<option value="PA">Preparar Aditivo</option>
+								<option value="AV">Analisar vantajosidade</option>
+							</select>
+						</div>
+						<div class="col-sm-7">
+							<label class="">Justificativa</label>
+							<textarea class="form-control" rows="3" name="atxt_justificativa_09" placeholder=""
+								data-size="big" readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 10 - JURIDICO - ELABORAR PARECER E A MINUTA DO TERMO ADITIVO -->
+		<div class="panel panel-info" id="div_10">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_10"
+						data-target="#elaborar_parecer_minuta" href="#elaborar_parecer_minuta">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Elaborar parecer juridico e a minuta do termo aditivo
+					</a>
+				</h3>
+			</div>
+			<div id="elaborar_parecer_minuta" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-input">
+										<label>Paracer juridico - Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_pj_10" placeholder=""
+											data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row row-btns">
+								<div class="col-sm-4">
+									<button type="button" id="btn_anexarParecer_10" class="btn btn-info required">Anexar
+										Parecer</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" id="btn_downloadParecer_10" class="btn btn-info">Download do
+										Parecer</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" id="btn_visualizarParecer_10" class="btn btn-info">Visualizar
+										Parecer</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-input">
+										<label>Minuta do Termo Aditivo - Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_mta_10" placeholder=""
+											data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row row-btns">
+								<div class="col-sm-4">
+									<button type="button" id="btn_anexarMinuta_10" class="btn btn-info required">Anexar
+										Minuta</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" id="btn_downloadMinuta_10" class="btn btn-info">Download
+										Minuta</button>
+								</div>
+								<div class="col-sm-4">
+									<button type="button" id="btn_visualizarMinuta_10" class="btn btn-info">Visualizar
+										Minuta</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" class="form-control" name="txt_nomeArquivoParecer_10" id="txt_nomeArquivoParecer_10" readonly>
+					<input type="hidden" class="form-control" name="txt_idDoc10Parecer" readonly>
+					<input type="hidden" class="form-control" name="txt_nomeArquivoMinuta_10" id="txt_nomeArquivoMinuta_10" readonly>
+					<input type="hidden" class="form-control" name="txt_idDoc10Minuta" readonly>
+					<!-- <div class="row">
+						<div class="col-sm-3">
+							<input type="hidden" class="form-control" name="txt_nomeArquivoParecer_10" id="txt_nomeArquivoParecer_10" readonly>
+						</div>
+						<div class="col-sm-3">
+							<input type="hidden" class="form-control" name="txt_idDoc10Parecer" readonly>
+						</div>
+						<div class="col-sm-3">
+							<input type="hidden" class="form-control" name="txt_nomeArquivoMinuta_10" id="txt_nomeArquivoMinuta_10" readonly>
+						</div>
+						<div class="col-sm-3">
+							<input type="hidden" class="form-control" name="txt_idDoc10Minuta" value="" readonly>
+						</div>
+					</div> -->
+					<!-- <div class="row form-input">
+						<div class="col-sm-4">
+							<label>Palavra Chave</label>
+							<input type="text" class="form-control" name="txt_palavraChave_29">
+						</div>
+						<div class="col-sm-4">
+							<label>Data Emissão</label>
+							<input type="text" class="form-control date" name="txt_dtEmissao_29">
+						</div>
+						<div class="col-sm-4">
+							<label>Data Validade</label>
+							<input type="text" class="form-control date" name="txt_dtValidade_29">
+						</div>
+					</div>
+					<div class="row form-input">
+						<div class="col-sm-6">
+							<label>Descrição</label>
+							<textarea class="form-control" rows="3" name="atxt_descricao_29" placeholder=""
+								data-size="big"></textarea>
+						</div>
+						<div class="col-sm-6">
+							<label>Observação</label>
+							<textarea class="form-control" rows="3" name="atxt_observacoes_29" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 10 - JURIDICO - ADVOGADO PARA REVISÃO -->
+		<!-- <div class="panel panel-info" id="div_11">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_11"
+						data-target="#advogado_revisao" href="#advogado_revisao">
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Selecionar advogado para revisão
+					</a>
+				</h3>
+			</div>
+			<div id="advogado_revisao" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							SELECIONE UM RESPONSAVEL
+							<div class="form-field" data-type="zoomfield" data-show-properties=""
+								data-field-name="zoomfield9">
+								<div class="form-input">
+									<div class="form-group">
+										<label for="zoom">Label zoomfield</label>
+										<div class="input-group">
+											<input type="zoom" class="form-control" name="zoomfield9"
+												data-zoom="{'fields':[{'standard':true}]}">
+											<div class="input-group-addon zoom-preview">
+												<span class="fluigicon fluigicon-zoom-in"></span>
+											</div>
+											<input type="hidden" name="hidden_zoomfield9" id=" hidden_zoomfield9">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- DIV 12 - JURIDICO -  Aprovar parecer jurídico -->
+		<div class="panel panel-info" id="div_12">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_12"
+						data-target="#ap_parecer_minuta" href="#ap_parecer_minuta">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Revisar parecer jurídico e a minuta do termo aditivo
+					</a>
+				</h3>
+			</div>
+			<div id="ap_parecer_minuta" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_apParecer_12">
+								<div class="form-input">
+									<div class="form-group">
+										<label class="required">Parecer e Minutas aprovadas?</label>
+										<div class="radio-options">
+											<div class="radio">
+												<label><input type="radio" name="rd_apParecer_12"
+														value="Sim">Sim</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" name="rd_apParecer_12"
+														value="Nao">Não</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-input">
+										<label>Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_obsApParecer_12"
+											placeholder="" data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Visualizar o Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 13 - JURIDICO - Aprovar parecer jurídico - Coordenador -->
+		<div class="panel panel-info" id="div_13">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_13"
+						data-target="#ap_parecer_minuta_coordenador" href="#ap_parecer_minuta_coordenador">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovar parecer jurídico e a minuta do termo aditivo - Coordenador(a)
+					</a>
+				</h3>
+			</div>
+			<div id="ap_parecer_minuta_coordenador" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Aprovado?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_apParecerCord_13" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_apParecerCord_13" value="Nao">Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-input">
+										<label>Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_obsApParecerCord_13"
+											placeholder="" data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Visualizar o Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 14 - JURIDICO -  Aprovar parecer jurídico - ASSESSOR -->
+		<div class="panel panel-info" id="div_14">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_14"
+						data-target="#ap_parecer_minuta_assessor" href="#ap_parecer_minuta_assessor">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Aprovar parecer jurídico e a minuta do termo aditivo - Assessor(a)
+					</a>
+				</h3>
+			</div>
+			<div id="ap_parecer_minuta_assessor" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Aprovado?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_apParecerAss_14" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_apParecerAss_14" value="Nao">Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-input">
+										<label>Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_obsApParecerAss_14"
+											placeholder="" data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Download do Arquivo</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-info">Visualizar o Arquivo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<button type="button" class="btn btn-info" id="btn_ass_parecerJuridico">Enviar Para Assinatura</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 15 - JURIDICO - CADASTRAR EMPRESA NO VERTSIGN -->
+		<div class="panel panel-info" id="div_15">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_15"
+						data-target="#cadastrar_empresa" href="#cadastrar_empresa">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Cadastrar dados do fornecedor
+					</a>
+				</h3>
+			</div>
+			<div id="cadastrar_empresa" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-2">
+							<label>CPF</label>
+							<input type="text" class="form-control" name="txt_cpf_fornecedor_15">
+						</div>
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-info" id="btn_carregarAssinante_15">Buscar</button>
+						</div>
+						<div class="col-sm-4">
+							<label>Nome</label>
+							<input type="text" class="form-control" name="txt_nome_fornecedor_15" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>E-Mail</label>
+							<input type="text" class="form-control" name="txt_email_fornecedor_15" readonly>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-info" id="btn_incluirAssinante_15">Incluir</button>
+						</div>
+					</div>
+					<div class="row">
+						<table tablename="tbl_assinantes_15" class="table" noaddbutton="true">
+							<thead>
+								<tr class="tableHeadRow">
+									<th class="tableColumn">CPF</th>
+									<th class="tableColumn">Nome</th>
+									<th class="tableColumn">E-mail</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tableBodyRow">
+									<td class="fs-v-align-middle">
+										<div class="form-input">
+											<input type="text" name="column1_4" class="form-control" readonly>
+										</div>
+									</td>
+									<td class="fs-v-align-middle">
+										<div class="form-input">
+											<input type="text" name="column2_4" class="form-control" readonly>
+										</div>
+									</td>
+									<td class="fs-v-align-middle">
+										<div class="form-input">
+											<input type="text" name="column3_4" class="form-control" readonly>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<button type="button" class="btn btn-info" id="btn_ass_minuta">Enviar Para Assinatura</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 17 - JURIDICO - DADOS DO CONTRATO -->
+		<div class="panel panel-info" id="div_17">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_17" data-target="#dados_contrato"
+						href="#dados_contrato">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Dados do Contrato
+					</a>
+				</h3>
+			</div>
+			<div id="dados_contrato" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Data de início do contrato</label>
+								<input type="text" class="form-control date" name="txt_dtInicio_17" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Data final vigente</label>
+								<input type="text" class="form-control date" name="txt_final_17" readonly>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-input">
+								<label class="required">Reajuste</label>
+								<input type="text" class="form-control" name="txt_reajuste_17" readonly>
+							</div>
+						</div>
+						<div class="col-sm-1">
+							<label class="required">Revisão</label>
+							<input type="text" class="form-control" name="txt_revisao_19" readonly>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Indice</label>
+								<input type="text" class="form-control" name="txt_ipca_17" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-input">
+								<label class="required">Objeto</label>
+								<textarea class="form-control" rows="3" name="atxt_obj_17" readonly></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Grupo de aprovação</label>
+								<input type="text" class="form-control" name="txt_gpAprovacao_17" value=""
+									placeholder="" data-size="big" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Descrição do Fornecedor</label>
+								<input type="text" class="form-control" name="txt_fornecedor_17" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Numero do Processo</label>
+								<input type="text" class="form-control" name="txt_nProcesso_17" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-input">
+								<label class="required">Entidade</label>
+								<input type="text" class="form-control" name="txt_entidade_17" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p>Tabela de Itens</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-input">
+								<table tablename="tbl_dadosContrato_17" class="table" noaddbutton="true"
+									nodeletebutton="true">
+									<thead>
+										<tr class="tableHeadRow">
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="form-input row">
+													<div class="col-sm-1 fs-no-padding-right">
+														<label>Item</label>
+														<input type="text" name="column1_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3 fs-no-padding-right">
+														<label>Codigo</label>
+														<input type="text" name="column2_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-4 fs-no-padding-right">
+														<label>Descrição</label>
+														<input type="text" name="column3_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Unitário</label>
+														<input type="text" name="column6_3" class="form-control money"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Total</label>
+														<input type="text" name="column7_3" class="form-control money"
+															readonly>
+													</div>
+												</div>
+												<div class="form-input row">
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Projeto</label>
+														<input type="text" name="column8_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Centro</label>
+														<input type="text" name="column9_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Programa</label>
+														<input type="text" name="column10_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>SubProg</label>
+														<input type="text" name="column11_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Conta</label>
+														<input type="text" name="column12_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-2 fs-no-padding-right">
+														<label>Grupo</label>
+														<input type="text" name="column13_3" class="form-control"
+															readonly>
+													</div>
+												</div>
+												<div class="form-input row">
+													<div class="col-sm-3 fs-no-padding-right">
+														<label>Unidade</label>
+														<input type="text" name="column4_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3 fs-no-padding-right">
+														<label>Quantidade</label>
+														<input type="text" name="column5_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3 fs-no-padding-right">
+														<label>Medida</label>
+														<input type="text" name="column14_3" class="form-control"
+															readonly>
+													</div>
+													<div class="col-sm-3 fs-no-padding-right">
+														<label>Saldo</label>
+														<input type="text" name="column15_3" class="form-control"
+															readonly>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 18 -  - PRAZO DE EXECUÇÃO -->
+		<div class="panel panel-info" id="div_18">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_18" data-target="#prazo_excecucao"
+						href="#prazo_excecucao">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Prazo de Excecução
+					</a>
+				</h3>
+			</div>
+			<div id="prazo_excecucao" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-12 form-input">
+							<label>Informe a nova data final</label>
+							<input type="text" class="form-control date" name="dt_novaData_18" id="dt_novaData_18"
+								readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info" id="div_30">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_30" data-target="#incluirAditivo"
+						href="#incluirAditivo">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						IncluirAditivo
+					</a>
+				</h3>
+			</div>
+			<div id="incluirAditivo" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-4">
+							<div class="form-input">
+								<label>Terá mais aditivos?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_incluirAditivo_30" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_incluirAditivo_30" value="Nao">Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-8" id="div_tipoAditivo_30">
+							<label>Qual tipo de aditivo?</label>
+							<select class="form-control" name="rd_tipoAditivo_30">
+								<option value="">Selecione o Aditivo</option>
+								<option value="div_19">Prazo e Quantidade (001)</option>
+								<option value="div_20">Reajuste (003)</option>
+								<option value="div_21">Indice (007)</option>
+								<option value="div_22">Realinhamento (008)</option>
+								<option value="div_23">Grupo de aprovador (010)</option>
+								<option value="div_24">Troca de fornecedor (012)</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 19 -  - PRAZO E QUANTIDADE 001-->
+		<div class="panel panel-info" id="div_19">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_19"
+						data-target="#prazo_quantidade" href="#prazo_quantidade">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Prazo e Quantidade (001)
+					</a>
+				</h3>
+			</div>
+			<div id="prazo_quantidade" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-3">
+							<label>Será 001?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_001_19" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_001_19" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label>Unidade de Vigência</label>
+							<select class="form-control" name="cb_vigencia_19">
+								<option value="" disabled selected>Selecione uma unidade</option>
+								<option value="1">Dias</option>
+								<option value="2">Meses</option>
+								<option value="3">Anos</option>
+								<option value="4">Indeterminada</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<label>Vigencia</label>
+							<input type="text" class="form-control" name="txt_vigencia_19" readonly>
+						</div>
+						<div class="col-sm-3">
+							<label>Nova Vigencia (Quantidade)</label>
+							<input type="text" class="form-control" name="txt_novaVigencia_19">
+						</div>
+					</div>
+					<div class="row form-input">
+						<div class="col-sm-12">
+							<label>Objeto do Aditivo (Justificativa do Protheus)</label>
+							<textarea class="form-control" rows="3" name="atxt_objAditivo_19" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p>Tabela de Itens</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table tablename="tbl_001_19" class="table" noaddbutton="true" nodeletebutton="true">
+								<thead>
+									<tr class="tableHeadRow">
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tableBodyRow form-input row">
+										<td class="col-sm-1">
+											<label>Item</label>
+											<input type="text" name="column1_5" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Código</label>
+											<input type="text" name="column2_5" class="form-control" readonly>
+										</td>
+										<td class="col-sm-5">
+											<label>Descrição</label>
+											<input type="text" name="column3_5" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Quantidade</label>
+											<input type="text" name="column4_5" class="form-control">
+										</td>
+										<td class="col-sm-2">
+											<label>Saldo</label>
+											<input type="text" name="column5_5" class="form-control" readonly>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 20 -  - Reajuste 003 -->
+		<div class="panel panel-info" id="div_20">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_20" data-target="#reajuste"
+						href="#reajuste">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Reajuste (003)
+					</a>
+				</h3>
+			</div>
+			<div id="reajuste" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-2">
+							<label>Será 003?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_3_20" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_3_20" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<label>Data do Reajuste</label>
+							<input type="text" class="form-control date" name="txt_dtReajuste_20">
+						</div>
+						<div class="col-sm-5">
+							<label>Referência do Reajuste</label>
+							<input type="text" class="form-control" name="txt_refReajuste_20">
+						</div>
+					</div>
+					<div class="row form-input">
+						<div class="col-sm-12">
+							<label>Objetivo do Aditivo (Justificativa do Protheus)</label>
+							<textarea class="form-control" rows="3" name="atxt_objAditivo_20" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p>Tabela de Itens</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table tablename="tbl_003_20" class="table" noaddbutton="true" nodeletebutton="true">
+								<thead>
+									<tr class="tableHeadRow">
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tableBodyRow form-input row">
+										<td class="col-sm-1">
+											<label>Item</label>
+											<input type="text" name="column1_6" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Código</label>
+											<input type="text" name="column2_6" class="form-control" readonly>
+										</td>
+										<td class="col-sm-5">
+											<label>Descrição</label>
+											<input type="text" name="column3_6" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Quantidade</label>
+											<input type="text" name="column4_6" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Saldo</label>
+											<input type="text" name="column5_6" class="form-control" readonly>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 21 -  - INDICE 007 -->
+		<div class="panel panel-info" id="div_21">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_21" data-target="#indice"
+						href="#indice">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Indice (007)
+					</a>
+				</h3>
+			</div>
+			<div id="indice" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-2">
+							<label>Será 007?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_7_21" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_7_21" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<label>Reajuste</label>
+							<input type="text" class="form-control" name="txt_reajuste_21" readonly>
+						</div>
+						<div class="col-sm-5">
+							<label>Índice</label>
+							<input type="zoom" class="form-control" name="zf_indice_21" data-zoom="{
+										'displayKey':'CN6_DESCRI',
+										'datasetId':'ds_consulta_indice',
+										'maximumSelectionLength':'1',
+										'placeholder':'Escolha o índice',
+										'fields':[
+											{
+												'field':'CN6_CODIGO',
+												'label':'CN6_CODIGO',
+												'standard':true,
+												'visible' : 'false'
+											},{
+												'field':'CN6_DESCRI',
+												'label':'CN6_DESCRI',
+												'standard':true
+											}
+										]
+									}">
+							<!-- <select class="form-control" name="cb_indice_21">
+								<option value="" disabled selected>Selecione um Indice</option>
+							</select> -->
+						</div>
+						<div class="col-sm-3">
+							<label>Descrição do Índice</label>
+							<input type="text" class="form-control" name="txt_descIndice_21" value="" placeholder=""
+								data-size="big">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-field" data-type="textarea" data-show-properties=""
+								data-field-name="atxt_objAditivo_21">
+								<div class="form-input">
+									<div class="form-group">
+										<label>Objetivo do Aditivo (Justificativa do Protheus)</label>
+										<textarea class="form-control" rows="3" name="atxt_objAditivo_21" placeholder=""
+											data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 22 -  - Realinhamento 008 -->
+		<div class="panel panel-info" id="div_22">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_22" data-target="#realinhamento"
+						href="#realinhamento">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Realinhamento (008)
+					</a>
+				</h3>
+			</div>
+			<div id="realinhamento" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Será 008?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_8_22" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_8_22" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-10">
+							<div class='form-input'>
+								<label>Justificativa</label>
+								<textarea class="form-control" rows="3" name="atxt_008_22" placeholder=""
+									data-size="big"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 colunaP">
+							<p>Tabela de Itens</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table tablename="tbl_008_22" class="table" noaddbutton="true" nodeletebutton="true">
+								<thead>
+									<tr class="tableHeadRow">
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tableBodyRow form-input row">
+										<td class="col-sm-1">
+											<label>Numero do Item</label>
+											<input type="text" name="column1_7" class="form-control" readonly>
+										</td>
+										<td class="col-sm-1">
+											<label>Código</label>
+											<input type="text" name="column2_7" class="form-control" readonly>
+										</td>
+										<td class="col-sm-4">
+											<label>Descrição</label>
+											<input type="text" name="column3_7" class="form-control" readonly>
+										</td>
+										<td class="col-sm-1">
+											<label>Quantidade</label>
+											<input type="text" name="column4_7" class="form-control" readonly>
+										</td>
+										<td class="col-sm-1">
+											<label>Saldo</label>
+											<input type="text" name="column5_7" class="form-control" readonly>
+										</td>
+										<td class="col-sm-2">
+											<label>Unitário</label>
+											<input type="text" name="column6_7" class="form-control">
+										</td>
+										<td class="col-sm-2">
+											<label>Total</label>
+											<input type="text" name="column7_7" class="form-control" readonly>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 23 -  - GRUPO DE APROVADOR 010 -->
+		<div class="panel panel-info" id="div_23">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_23" data-target="#grupo_aprovador"
+						href="#grupo_aprovador">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Grupo de aprovador (010)
+					</a>
+				</h3>
+			</div>
+			<div id="grupo_aprovador" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Será 010?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_010_23" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_010_23" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class='col-sm-5'>
+							<label>Grupo atual:</label>
+							<input type="text" class="form-control" name="slc_gpAtual_23" readonly>
+						</div>
+						<div class='col-sm-5'>
+							<label>Grupo futuro:</label>
+							<input type="zoom" class="form-control" name="zf_gpAtual_23" data-zoom="{
+										'displayKey':'AL_DESC',
+										'datasetId':'ds_consulta_grupo_aprovacao',
+										'maximumSelectionLength':'1',
+										'placeholder':'Escolha o grupo',
+										'fields':[
+											{
+												'field':'AL_DESC',
+												'label':'AL_DESC',
+												'standard':true
+											},{
+												'field':'AL_USER',
+												'label':'AL_USER'
+											},{
+												'field':'AL_COD',
+												'label':'AL_COD',
+												'visible' : 'false'
+											}
+										]
+									}">
+							<!-- <input type="hidden" name="txt_zf_fornecedores_24" id="txt_zf_fornecedores_24"> -->
+							<!-- <select class="form-control" name="slc_010_23">
+								<option value="" selected>Selecione um grupo</option>
+							</select> -->
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col-sm-12'>
+							<div class='form-input'>
+								<label>Objetivo do aditivo</label>
+								<textarea class="form-control" rows="3" name="atxt_010_23"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- DIV 24 -  - TROCA DE FORNECEDOR 012 -->
+		<div class="panel panel-info" id="div_24">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_24"
+						data-target="#troca_fornecedor" href="#troca_fornecedor">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Troca de fornecedor (012)
+					</a>
+				</h3>
+			</div>
+			<div id="troca_fornecedor" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-1">
+							<label>Será 012?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_012_24" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_012_24" value="Nao" checked>Nao</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2 form-input">
+							<label>Cod Fornecedor</label>
+							<input type="text" class="form-control" name="txt_codAnterior_24" readonly>
+						</div>
+						<div class="col-sm-3 form-input">
+							<label>Loja</label>
+							<input type="text" class="form-control" name="txt_lojaAnterior_24" readonly>
+						</div>
+						<div class="col-sm-3 form-input">
+							<label>CNPJ</label>
+							<input type="text" class="form-control" name="txt_CNPJAnterior_24" readonly>
+						</div>
+						<div class="col-sm-3 form-input">
+							<label>Razão Social</label>
+							<input type="text" class="form-control" name="txt_RazaoAnterior_24" readonly>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col-sm-12 colunaP'>
+							<p>Lista de Fornecedores</p>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col-sm-5'>
+							<label for="zoom">Filiais</label>
+							<div class="form-input">
+								<input type="zoom" class="form-control" name="zf_fornecedores_24" data-zoom="{
+										'displayKey':'A2_CGC',
+										'datasetId':'ds_consulta_fornecedor',
+										'maximumSelectionLength':'1',
+										'placeholder':'Escolha a filial',
+										'fields':[
+											{
+												'field':'A2_LOJA',
+												'label':'A2_LOJA',
+												'standard':true
+											},{
+												'field':'A2_NOME',
+												'label':'A2_NOME'
+											},{
+												'field':'A2_CGC',
+												'label':'A2_CGC'
+											},{
+												'field':'A2_COD',
+												'label':'A2_COD'
+											}
+										]
+									}">
+								<input type="hidden" name="txt_zf_fornecedores_24" id="txt_zf_fornecedores_24">
+							</div>
+						</div>
+						<div class='col-sm-1'>
+							<label>Código</label>
+							<input type="text" class="form-control" name="txt_codNovoFornecedor_24" readonly>
+						</div>
+						<div class='col-sm-1'>
+							<label>Loja</label>
+							<input type="text" name="LojaSelecionada_24" class="form-control" readonly>
+						</div>
+						<div class='col-sm-2'>
+							<label>CNPJ</label>
+							<input type="text" name="CNPJSelecionado_24" class="form-control" readonly>
+						</div>
+						<div class='col-sm-3'>
+							<label>Razão Social</label>
+							<input type="text" name="RazaoSelecionada_24" class="form-control" readonly>
+						</div>
+					</div>
+					<div class='row'>
+						<div class="col-sm-12 form-input">
+							<label>Objetivo do Aditivo</label>
+							<textarea class="form-control" rows="3" name="atxt_012_24" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info" id="div_29">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_29" data-target="#anexarDocumento"
+						href="#anexarDocumento">
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Anexar Documento
+					</a>
+				</h3>
+			</div>
+			<div id="anexarDocumento" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="row form-input">
+						<div class="col-sm-4">
+							<label>Palavra Chave</label>
+							<input type="text" class="form-control" name="txt_palavraChave_29">
+						</div>
+						<div class="col-sm-4">
+							<label>Data Emissão</label>
+							<input type="text" class="form-control date" name="txt_dtEmissao_29">
+						</div>
+						<div class="col-sm-4">
+							<label>Data Validade</label>
+							<input type="text" class="form-control date" name="txt_dtValidade_29">
+						</div>
+					</div>
+					<div class="row form-input">
+						<div class="col-sm-6">
+							<label>Descrição</label>
+							<textarea class="form-control" rows="3" name="atxt_descricao_29" placeholder=""
+								data-size="big"></textarea>
+						</div>
+						<div class="col-sm-6">
+							<label>Observação</label>
+							<textarea class="form-control" rows="3" name="atxt_observacoes_29" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="panel panel-info" id="div_26">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_26"
+						data-target="#revisar_cadastro_protheus" href="#revisar_cadastro_protheus">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Revisar cadastro no Protheus
+					</a>
+				</h3>
+			</div>
+			<div id="revisar_cadastro_protheus" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row form-group">
+						<div class="col-sm-2">
+							<label class="required">Aprovado?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_rev_cad_prot_26" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_rev_cad_prot_26" value="Nao">Não</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-10">
+							<label>Observação</label>
+							<textarea class="form-control" rows="3" name="atxt_obs_rev_cad_26" placeholder=""
+								data-size="big"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info" id="div_25">
+			<!-- trocar o ID -->
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_25"
+						data-target="#devolver_solicitante" href="#devolver_solicitante">
+						<!-- trocar o href,data-target, data-parent -->
+						<span class="flaticon flaticon-message icon-sm"></span>
+						Devolver solicitante
+					</a>
+				</h3>
+			</div>
+			<div id="devolver_solicitante" class="panel-collapse collapse">
+				<!-- trocar o ID -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="form-field" data-type="radio" data-show-properties=""
+								data-field-name="rd_devSolicitante_25">
+								<div class="form-input">
+									<div class="form-group">
+										<label class="required">Aprovado?</label>
+										<div class="radio-options">
+											<div class="radio">
+												<label><input type="radio" name="rd_devSolicitante_25"
+														value="Sim">Sim</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" name="rd_devSolicitante_25"
+														value="Nao">Não</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-10">
+							<div class="form-field" data-type="textarea" data-show-properties=""
+								data-field-name="atxt_obsDevSolic_25">
+								<div class="form-input">
+									<div class="form-group">
+										<label>Observação</label>
+										<textarea class="form-control" rows="3" name="atxt_obsDevSolic_25"
+											placeholder="" data-size="big"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- FINALIZADO NO 26 -->
+	</form>
+</body>
+
+</html>
