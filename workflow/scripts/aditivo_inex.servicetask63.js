@@ -7,4 +7,3 @@ function servicetask63(attempt, message) {
     anexaDocumentoAssinado(idDocumento,nr_pasta,solicitacao,nmArquivo+'_assinado.pdf')
     log.info("#### >> ADITIVO TASK63 - FIM")
 }
-

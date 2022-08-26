@@ -55,8 +55,14 @@ function servicetask218(attempt, message) {
 		log.info('TROCA_FORNECEDOR');
 		log.dir(trocaFornecedor012);
 
-		var company = '73471989000195';
+		var NUMCNPJ = hAPI.getCardValue('txt_entidade_17') //'73471989000195'; VERIFICA SE O CNPJ E SEST OU SENAT
+		var company = '' //'73471989000195'; NUMERO CNPJ SEST/SENAT
+
+		if (NUMCNPJ == '010001') company = '73471989000195' //VERIFICA SE O CNPJ E SEST OU SENAT
+		if (NUMCNPJ == '020001') company = '73471963000147' //VERIFICA SE O CNPJ E SEST OU SENAT
+
 		var contrato = hAPI.getCardValue('txt_nProcesso_17'); //'000000000004627';
+		
 		// var revisao = hAPI.getCardValue('txt_revisao_19'); //'001';
 
 		//CHAMA A INTEGRAÇÃO PRAZO E QUANTIDADE "001"
@@ -66,7 +72,7 @@ function servicetask218(attempt, message) {
 			log.dir(revisao);
 
 			var justificativa = hAPI.getCardValue('atxt_objAditivo_19') //'TESTE FLUIG TREGUAS';
-			log.info('HAILIE - PRAZO E QUANTIDADE')
+			log.info('TS - PRAZO E QUANTIDADE')
 			var subItem = [];
 			var indexes = hAPI.getChildrenIndexes('tbl_001_19');
 
@@ -81,7 +87,7 @@ function servicetask218(attempt, message) {
 							"CNB_ITEM": CNB_ITEM
 						},
 						{
-							"CNB_QUANT": parseInt(CNB_QUANT)
+							"CNB_QUANT": parseFloat(CNB_QUANT)
 						}
 					]
 				}
@@ -429,7 +435,8 @@ function servicetask218(attempt, message) {
 
 			var loja = [{
 				"tab": "CNC",
-				"data": [{
+				"data": [
+					{
 						"CNC_CODIGO": hAPI.getCardValue('txt_codNovoFornecedor_24') //'000015'
 					},
 					{
@@ -437,8 +444,6 @@ function servicetask218(attempt, message) {
 					}
 				]
 			}]
-
-
 
 			var opcao = 10
 			var tipo_aditivo = tipoAditivo(opcao);

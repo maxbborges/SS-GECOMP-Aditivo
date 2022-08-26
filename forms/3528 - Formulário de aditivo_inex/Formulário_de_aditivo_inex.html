@@ -13,34 +13,27 @@
 	<script src="/style-guide/js/fluig-style-guide-filter.min.js"></script>
 	<script src="/style-guide/js/fluig-style-guide-ratingstars.min.js"></script>
 	<link href='/webdesk/customresources?cid=1&resourceName=temaFormulario/0.css' type='text/css' rel='stylesheet' />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 	<link href='./custom/custom.css' type='text/css' rel='stylesheet' />
 	<script type="text/javascript" src="./custom/attachments.js"></script>
 	<script type="text/javascript" src="./custom/custom.js"></script>
 	<script type="text/javascript" src="./custom/activities.js"></script>
-
+	<script type="text/javascript" src="./custom/functionsCustom.js"></script>
+	<script type="text/javascript" src="./custom/jqueryMask.js"></script>
+	<script type="text/javascript" src="./custom/jqueryMaskMoneyMin.js"></script>
 </head>
 
 <body class="fluig-style-guide">
-
 	<form class="totvs-form grid vertical create-form-components ui-sortable t0" name="createFormComponents"
 		style="padding-left: 10px; padding-right: 10px;">
 		<h1 class="title-form-application">Aditivo</h1>
-		<div class="paragraph-is-required system-message-information alert alert-info" role="alert">Todos os campos com
-			* são de preenchimento obrigatório.</div>
-		<input type="hidden" class="form-control" name="txt_codFilialAnterior" value="" placeholder="" data-size="big"
-			readonly>
-		<input type="hidden" class="form-control" name="txt_nContratoAnterior" value="" placeholder="" data-size="big"
-			readonly>
-		<input type="hidden" class="form-control" name="txt_nrPasta" value="8657" placeholder="" data-size="big"
-			readonly>
-
-
-
-
-		<input type="hidden" class="form-control" name="txt_CN9_VIGE" value="" placeholder="" data-size="big" readonly>
+		<div class="paragraph-is-required system-message-information alert alert-info" role="alert">
+			Todos os campos com * são de preenchimento obrigatório.
+		</div>
+		<input type="hidden" class="form-control" name="txt_codFilialAnterior" readonly>
+		<input type="hidden" class="form-control" name="txt_nContratoAnterior"readonly>
+		<input type="hidden" class="form-control" name="txt_nrPasta" value="8657" readonly>
+		<input type="hidden" class="form-control" name="txt_CN9_VIGE" readonly>
 		<input type="hidden" class="form-control" name="txt_CN9_UNVIGE" readonly>
 		<input type="hidden" class="form-control" name="txt_zf_indice" readonly>
 		<input type="hidden" class="form-control" name="txt_zf_grupoAprovador" readonly>
@@ -71,7 +64,8 @@
 								placeholder="Digite o número do processo anterior" data-size="big">
 						</div>
 						<div class="col-sm-2 col-btn">
-							<button type="button" class="btn btn-info required" id='btn_CarregarProceso_00'>Buscar</button>
+							<button type="button" class="btn btn-info required"
+								id='btn_CarregarProceso_00'>Buscar</button>
 						</div>
 						<div class="col-sm-6">
 							<label class="required">Fornecedor</label>
@@ -112,13 +106,13 @@
 						<div class="col-sm-8">
 							<div class="row form-input">
 								<div class="col-sm-12">
-									<label class='required'>Observações</label>
+									<label>Observações</label>
 									<textarea class="form-control" rows="3" name="atxt_observacoes_01"></textarea>
 								</div>
 							</div>
 							<div class="row row-btns">
 								<div class="col-sm-4">
-									<button type="button" class="btn btn-info required" id="btn_anexar_01">Anexar
+									<button type="button" class="btn btn-info" id="btn_anexar_01">Anexar
 										Arquivo</button>
 								</div>
 								<div class="col-sm-4">
@@ -132,7 +126,8 @@
 							</div>
 						</div>
 					</div>
-					<input type="hidden" class="form-control" name="txt_nomeArquivo_01" id="txt_nomeArquivo_01" readonly>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_01" id="txt_nomeArquivo_01"
+						readonly>
 					<input type="hidden" class="form-control" name="txt_idDoc01" readonly>
 				</div>
 			</div>
@@ -271,7 +266,7 @@
 						<!-- ### Exibir por padrão o campo desabilitado. Habilitar o campo se o ator selecionar a opção “Sim” no campo anterior.-->
 						<div class="col-sm-3 form-input">
 							<label class="">Informe a nova data final</label>
-							<input type="input" class="form-control date" name="txt_vigencia_novo"
+							<input type="text" class="form-control date" name="txt_vigencia_novo"
 								id="txt_vigencia_novo" value="" placeholder="" data-size="big">
 						</div>
 					</div>
@@ -318,11 +313,11 @@
 					<div class="row form-input">
 						<div class="col-sm-6">
 							<label>Valor inicial:</label>
-							<input type="text" class="form-control money" name="txt_valor_inicial" readonly>
+							<input type="text" class="form-control money" name="txt_valor_inicial" value="0.00" readonly>
 						</div>
 						<div class="col-sm-6">
 							<label class="required">Valor final</label>
-							<input type="text" class="form-control money" name="txt_valor_atual" readonly>
+							<input type="text" class="form-control money" name="txt_valor_atual" value="0.00" readonly>
 						</div>
 					</div>
 					<div class="row">
@@ -483,7 +478,7 @@
 						<!-- ### Máscara: 13,25 -->
 						<div class="col-sm-5">
 							<div class="form-input">
-								<label class="">Informe o percentual de reajuste</label>
+								<label class="">Informe o percentual de revisão</label>
 								<input type="text" class="form-control" name="txt_percentualRevisao_02" readonly>
 							</div>
 						</div>
@@ -668,17 +663,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="row">
-						<div class="col-sm-4">
-							<button type="button" class="btn btn-info">Anexar Arquivo</button>
-						</div>
-						<div class="col-sm-4">
-							<button type="button" class="btn btn-info">Download do Arquivo</button>
-						</div>
-						<div class="col-sm-4">
-							<button type="button" class="btn btn-info">Visualizar Arquivo</button>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -709,7 +693,7 @@
 							</div>
 							<div class="row row-btns">
 								<div class="col-sm-4">
-									<button type="button" class="btn btn-info" id="btn_anexar_27">Anexar
+									<button type="button" class="btn btn-info required" id="btn_anexar_27">Anexar
 										Arquivo</button>
 								</div>
 								<div class="col-sm-4">
@@ -720,13 +704,12 @@
 									<button type="button" class="btn btn-info" id="btn_visualizar_27">Visualizar
 										Arquivo</button>
 								</div>
-								<!-- <div class="col-sm-4">
-									<button type="button" class="btn btn-info" id="btn_ass_notaTecnica">Enviar Para Assinatura</button>
-								</div> -->
 							</div>
 						</div>
 					</div>
-					<input type="hidden" class="form-control" name="txt_nomeArquivo_27" id="txt_nomeArquivo_27" readonly>
+					<label class="required labelHidden"></label>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_27" id="txt_nomeArquivo_27"
+						readonly>
 					<input type="hidden" class="form-control" name="txt_idDoc27" readonly>
 				</div>
 			</div>
@@ -778,20 +761,14 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="row">
-								<div class="col-sm-4">
-									<button type="button" class="btn btn-info">Anexar Arquivo</button>
-								</div>
-								<div class="col-sm-4">
-									<button type="button" class="btn btn-info">Download do Arquivo</button>
-								</div>
-								<div class="col-sm-4">
-									<button type="button" class="btn btn-info">Visualizar Arquivo</button>
-								</div>
-							</div> -->
 						</div>
 					</div>
-					<button type="button" class="btn btn-info" id="btn_ass_notaTecnica">Enviar Para Assinatura</button>
+					<div class="row row-btns">
+						<button type="button" class="btn btn-info required" id="btn_ass_notaTecnica">Enviar Para
+							Assinatura</button>
+						<label class="required labelHidden"></label>
+						<input type="hidden" class="form-control" name="txt_03_validaVertsign" readonly>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -987,12 +964,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- <div class="col-sm-4">
-							<button type="button" class="btn btn-info">Anexar Arquivo</button>
-						</div>
-						<div class="col-sm-4">
-							<button type="button" class="btn btn-info">Download do Arquivo</button>
-						</div> -->
 						<div class="col-sm-12 row-btns">
 							<button type="button" class="btn btn-info" id="btn_incluir_06">Incluir Pesquisa de
 								preço</button>
@@ -1104,7 +1075,8 @@
 					</div>
 					<div class="row row-btns">
 						<div class="col-sm-4">
-							<button type="button" id="btn_anexar_07" class="btn btn-info">Anexar Arquivo</button>
+							<button type="button" id="btn_anexar_07" class="btn btn-info required">Anexar
+								Arquivo</button>
 						</div>
 						<div class="col-sm-4">
 							<button type="button" id="btn_download_07" class="btn btn-info">Download do
@@ -1115,7 +1087,9 @@
 								Arquivo</button>
 						</div>
 					</div>
-					<input type="hidden" class="form-control" name="txt_nomeArquivo_07" id="txt_nomeArquivo_07" readonly>
+					<label class="required labelHidden"></label>
+					<input type="hidden" class="form-control" name="txt_nomeArquivo_07" id="txt_nomeArquivo_07"
+						readonly>
 					<input type="hidden" class="form-control" name="txt_idDoc07" readonly>
 				</div>
 			</div>
@@ -1138,7 +1112,7 @@
 				<div class="panel-body">
 					<div class="row form-input">
 						<div class="col-sm-3">
-							<label>Aprovado?</label>
+							<label class="required">Aprovado?</label>
 							<div class="radio-options">
 								<div class="radio">
 									<label><input type="radio" name="rd_apGerencia_28" value="Sim">Sim</label>
@@ -1158,7 +1132,13 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-info" id="btn_ass_novaNotaTecnica">Enviar Para Assinatura</button>
+					<div class="row row-btns">
+						<button type="button" class="btn btn-info" id="btn_ass_novaNotaTecnica">Enviar Para
+							Assinatura</button>
+						<label class="required labelHidden"></label>
+						<input type="hidden" class="form-control" name="txt_28_validaVertsign" readonly>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -1309,91 +1289,17 @@
 							</div>
 						</div>
 					</div>
-					<input type="hidden" class="form-control" name="txt_nomeArquivoParecer_10" id="txt_nomeArquivoParecer_10" readonly>
+					<label class="required labelHidden"></label>
+					<input type="hidden" class="form-control" name="txt_nomeArquivoParecer_10"
+						id="txt_nomeArquivoParecer_10" readonly>
 					<input type="hidden" class="form-control" name="txt_idDoc10Parecer" readonly>
-					<input type="hidden" class="form-control" name="txt_nomeArquivoMinuta_10" id="txt_nomeArquivoMinuta_10" readonly>
+					<label class="required labelHidden"></label>
+					<input type="hidden" class="form-control" name="txt_nomeArquivoMinuta_10"
+						id="txt_nomeArquivoMinuta_10" readonly>
 					<input type="hidden" class="form-control" name="txt_idDoc10Minuta" readonly>
-					<!-- <div class="row">
-						<div class="col-sm-3">
-							<input type="hidden" class="form-control" name="txt_nomeArquivoParecer_10" id="txt_nomeArquivoParecer_10" readonly>
-						</div>
-						<div class="col-sm-3">
-							<input type="hidden" class="form-control" name="txt_idDoc10Parecer" readonly>
-						</div>
-						<div class="col-sm-3">
-							<input type="hidden" class="form-control" name="txt_nomeArquivoMinuta_10" id="txt_nomeArquivoMinuta_10" readonly>
-						</div>
-						<div class="col-sm-3">
-							<input type="hidden" class="form-control" name="txt_idDoc10Minuta" value="" readonly>
-						</div>
-					</div> -->
-					<!-- <div class="row form-input">
-						<div class="col-sm-4">
-							<label>Palavra Chave</label>
-							<input type="text" class="form-control" name="txt_palavraChave_29">
-						</div>
-						<div class="col-sm-4">
-							<label>Data Emissão</label>
-							<input type="text" class="form-control date" name="txt_dtEmissao_29">
-						</div>
-						<div class="col-sm-4">
-							<label>Data Validade</label>
-							<input type="text" class="form-control date" name="txt_dtValidade_29">
-						</div>
-					</div>
-					<div class="row form-input">
-						<div class="col-sm-6">
-							<label>Descrição</label>
-							<textarea class="form-control" rows="3" name="atxt_descricao_29" placeholder=""
-								data-size="big"></textarea>
-						</div>
-						<div class="col-sm-6">
-							<label>Observação</label>
-							<textarea class="form-control" rows="3" name="atxt_observacoes_29" placeholder=""
-								data-size="big"></textarea>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
-
-		<!-- DIV 10 - JURIDICO - ADVOGADO PARA REVISÃO -->
-		<!-- <div class="panel panel-info" id="div_11">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<a class="collapse-icon" data-toggle="collapse" data-parent="#div_11"
-						data-target="#advogado_revisao" href="#advogado_revisao">
-						<span class="flaticon flaticon-message icon-sm"></span>
-						Selecionar advogado para revisão
-					</a>
-				</h3>
-			</div>
-			<div id="advogado_revisao" class="panel-collapse collapse">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-6">
-							SELECIONE UM RESPONSAVEL
-							<div class="form-field" data-type="zoomfield" data-show-properties=""
-								data-field-name="zoomfield9">
-								<div class="form-input">
-									<div class="form-group">
-										<label for="zoom">Label zoomfield</label>
-										<div class="input-group">
-											<input type="zoom" class="form-control" name="zoomfield9"
-												data-zoom="{'fields':[{'standard':true}]}">
-											<div class="input-group-addon zoom-preview">
-												<span class="fluigicon fluigicon-zoom-in"></span>
-											</div>
-											<input type="hidden" name="hidden_zoomfield9" id=" hidden_zoomfield9">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 
 		<!-- DIV 12 - JURIDICO -  Aprovar parecer jurídico -->
 		<div class="panel panel-info" id="div_12">
@@ -1560,7 +1466,13 @@
 							</div> -->
 						</div>
 					</div>
-					<button type="button" class="btn btn-info" id="btn_ass_parecerJuridico">Enviar Para Assinatura</button>
+					<div class="row row-btns">
+						<button type="button" class="btn btn-info required" id="btn_ass_parecerJuridico">Enviar Para
+							Assinatura</button>
+						<label class="required labelHidden"></label>
+						<input type="hidden" class="form-control" name="txt_14_validaVertsign" readonly>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -1581,57 +1493,44 @@
 			<div id="cadastrar_empresa" class="panel-collapse collapse">
 				<!-- trocar o ID -->
 				<div class="panel-body">
-					<div class="row form-input">
-						<div class="col-sm-2">
-							<label>CPF</label>
-							<input type="text" class="form-control" name="txt_cpf_fornecedor_15">
-						</div>
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-info" id="btn_carregarAssinante_15">Buscar</button>
-						</div>
-						<div class="col-sm-4">
-							<label>Nome</label>
-							<input type="text" class="form-control" name="txt_nome_fornecedor_15" readonly>
-						</div>
-						<div class="col-sm-4">
-							<label>E-Mail</label>
-							<input type="text" class="form-control" name="txt_email_fornecedor_15" readonly>
-						</div>
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-info" id="btn_incluirAssinante_15">Incluir</button>
+					<div class="row form-group">
+						<div class="col-sm-12">
+							<label>Assinantes Cadastrados</label>
+							<input type="text" class="form-control zoomField" name="zf_01_assinantes" id="zf_01_assinantes">
 						</div>
 					</div>
 					<div class="row">
-						<table tablename="tbl_assinantes_15" class="table" noaddbutton="true">
-							<thead>
-								<tr class="tableHeadRow">
-									<th class="tableColumn">CPF</th>
-									<th class="tableColumn">Nome</th>
-									<th class="tableColumn">E-mail</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="tableBodyRow">
-									<td class="fs-v-align-middle">
-										<div class="form-input">
+						<div class="col-sm-12">
+							<table tablename="tbl_assinantes_15" class="table" noaddbutton="true">
+								<thead>
+									<tr class="tableHeadRow">
+										<th class="tableColumn">CPF</th>
+										<th class="tableColumn">Nome</th>
+										<th class="tableColumn">E-mail</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tableBodyRow form-input">
+										<td class="col-sm-4">
 											<input type="text" name="column1_4" class="form-control" readonly>
-										</div>
-									</td>
-									<td class="fs-v-align-middle">
-										<div class="form-input">
+										</td>
+										<td class="col-sm-4">
 											<input type="text" name="column2_4" class="form-control" readonly>
-										</div>
-									</td>
-									<td class="fs-v-align-middle">
-										<div class="form-input">
+										</td>
+										<td class="col-sm-4">
 											<input type="text" name="column3_4" class="form-control" readonly>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-					<button type="button" class="btn btn-info" id="btn_ass_minuta">Enviar Para Assinatura</button>
+					<div class="row row-btns">
+						<button type="button" class="btn btn-info required" id="btn_ass_minuta">Enviar Para
+							Assinatura</button>
+						<label class="required labelHidden"></label>
+						<input type="hidden" class="form-control" name="txt_15_validaVertsign" readonly>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -1869,9 +1768,9 @@
 				<!-- trocar o ID -->
 				<div class="panel-body">
 					<div class="row form-input">
-						<div class="col-sm-4">
+						<div class="col-sm-2">
 							<div class="form-input">
-								<label>Terá mais aditivos?</label>
+								<label class="required">Terá aditivos?</label>
 								<div class="radio-options">
 									<div class="radio">
 										<label><input type="radio" name="rd_incluirAditivo_30" value="Sim">Sim</label>
@@ -1882,7 +1781,20 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-8" id="div_tipoAditivo_30">
+						<div class="col-sm-2">
+							<div class="form-input">
+								<label class="required">Haverá lançamento de revisão no sistema?</label>
+								<div class="radio-options">
+									<div class="radio">
+										<label><input type="radio" name="rd_haveraRevisao_30" value="Sim">Sim</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="rd_haveraRevisao_30" value="Nao">Não</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6" id="div_tipoAditivo_30">
 							<label>Qual tipo de aditivo?</label>
 							<select class="form-control" name="rd_tipoAditivo_30">
 								<option value="">Selecione o Aditivo</option>
@@ -1893,6 +1805,17 @@
 								<option value="div_23">Grupo de aprovador (010)</option>
 								<option value="div_24">Troca de fornecedor (012)</option>
 							</select>
+						</div>
+						<div class="col-sm-2 form-input" id='div_30_terminarAditivo'>
+							<label>Último aditivo?</label>
+							<div class="radio-options">
+								<div class="radio">
+									<label><input type="radio" name="rd_30_continuar" value="Sim">Sim</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="rd_30_continuar" value="Nao">Não</label>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -2117,32 +2040,7 @@
 						</div>
 						<div class="col-sm-5">
 							<label>Índice</label>
-							<input type="zoom" class="form-control" name="zf_indice_21" data-zoom="{
-										'displayKey':'CN6_DESCRI',
-										'datasetId':'ds_consulta_indice',
-										'maximumSelectionLength':'1',
-										'placeholder':'Escolha o índice',
-										'fields':[
-											{
-												'field':'CN6_CODIGO',
-												'label':'CN6_CODIGO',
-												'standard':true,
-												'visible' : 'false'
-											},{
-												'field':'CN6_DESCRI',
-												'label':'CN6_DESCRI',
-												'standard':true
-											}
-										]
-									}">
-							<!-- <select class="form-control" name="cb_indice_21">
-								<option value="" disabled selected>Selecione um Indice</option>
-							</select> -->
-						</div>
-						<div class="col-sm-3">
-							<label>Descrição do Índice</label>
-							<input type="text" class="form-control" name="txt_descIndice_21" value="" placeholder=""
-								data-size="big">
+							<input type="text" class="form-control zoomField" name="zf_indice_21">
 						</div>
 					</div>
 					<div class="row">
@@ -2284,30 +2182,7 @@
 						</div>
 						<div class='col-sm-5'>
 							<label>Grupo futuro:</label>
-							<input type="zoom" class="form-control" name="zf_gpAtual_23" data-zoom="{
-										'displayKey':'AL_DESC',
-										'datasetId':'ds_consulta_grupo_aprovacao',
-										'maximumSelectionLength':'1',
-										'placeholder':'Escolha o grupo',
-										'fields':[
-											{
-												'field':'AL_DESC',
-												'label':'AL_DESC',
-												'standard':true
-											},{
-												'field':'AL_USER',
-												'label':'AL_USER'
-											},{
-												'field':'AL_COD',
-												'label':'AL_COD',
-												'visible' : 'false'
-											}
-										]
-									}">
-							<!-- <input type="hidden" name="txt_zf_fornecedores_24" id="txt_zf_fornecedores_24"> -->
-							<!-- <select class="form-control" name="slc_010_23">
-								<option value="" selected>Selecione um grupo</option>
-							</select> -->
+							<input type="text" class="form-control zoomField" name="zf_gpAtual_23">
 						</div>
 					</div>
 					<div class='row'>
@@ -2352,19 +2227,19 @@
 						</div>
 						<div class="col-sm-2 form-input">
 							<label>Cod Fornecedor</label>
-							<input type="text" class="form-control" name="txt_codAnterior_24" readonly>
+							<input type="text" class="form-control" name="txt_codAnterior_24">
 						</div>
 						<div class="col-sm-3 form-input">
 							<label>Loja</label>
-							<input type="text" class="form-control" name="txt_lojaAnterior_24" readonly>
+							<input type="text" class="form-control" name="txt_lojaAnterior_24">
 						</div>
 						<div class="col-sm-3 form-input">
 							<label>CNPJ</label>
-							<input type="text" class="form-control" name="txt_CNPJAnterior_24" readonly>
+							<input type="text" class="form-control" name="txt_CNPJAnterior_24">
 						</div>
 						<div class="col-sm-3 form-input">
 							<label>Razão Social</label>
-							<input type="text" class="form-control" name="txt_RazaoAnterior_24" readonly>
+							<input type="text" class="form-control" name="txt_RazaoAnterior_24">
 						</div>
 					</div>
 					<div class='row'>
@@ -2372,50 +2247,27 @@
 							<p>Lista de Fornecedores</p>
 						</div>
 					</div>
-					<div class='row'>
+					<div class='row input-group'>
 						<div class='col-sm-5'>
-							<label for="zoom">Filiais</label>
-							<div class="form-input">
-								<input type="zoom" class="form-control" name="zf_fornecedores_24" data-zoom="{
-										'displayKey':'A2_CGC',
-										'datasetId':'ds_consulta_fornecedor',
-										'maximumSelectionLength':'1',
-										'placeholder':'Escolha a filial',
-										'fields':[
-											{
-												'field':'A2_LOJA',
-												'label':'A2_LOJA',
-												'standard':true
-											},{
-												'field':'A2_NOME',
-												'label':'A2_NOME'
-											},{
-												'field':'A2_CGC',
-												'label':'A2_CGC'
-											},{
-												'field':'A2_COD',
-												'label':'A2_COD'
-											}
-										]
-									}">
-								<input type="hidden" name="txt_zf_fornecedores_24" id="txt_zf_fornecedores_24">
-							</div>
+							<label>Fornecedores</label>
+							<input type="text" class="form-control zoomField" name="zf_fornecedores_24" id="zf_fornecedores_24">
+							<input type="hidden" name="txt_zf_fornecedores_24" id="txt_zf_fornecedores_24" readonly>
 						</div>
 						<div class='col-sm-1'>
 							<label>Código</label>
-							<input type="text" class="form-control" name="txt_codNovoFornecedor_24" readonly>
+							<input type="text" class="form-control" name="txt_codNovoFornecedor_24">
 						</div>
 						<div class='col-sm-1'>
 							<label>Loja</label>
-							<input type="text" name="LojaSelecionada_24" class="form-control" readonly>
+							<input type="text" name="LojaSelecionada_24" class="form-control">
 						</div>
 						<div class='col-sm-2'>
 							<label>CNPJ</label>
-							<input type="text" name="CNPJSelecionado_24" class="form-control" readonly>
+							<input type="text" name="CNPJSelecionado_24" class="form-control">
 						</div>
 						<div class='col-sm-3'>
 							<label>Razão Social</label>
-							<input type="text" name="RazaoSelecionada_24" class="form-control" readonly>
+							<input type="text" name="RazaoSelecionada_24" class="form-control">
 						</div>
 					</div>
 					<div class='row'>
@@ -2443,26 +2295,26 @@
 				<div class="panel-body">
 					<div class="row form-input">
 						<div class="col-sm-4">
-							<label>Palavra Chave</label>
+							<label class="required">Tipo Documento</label>
 							<input type="text" class="form-control" name="txt_palavraChave_29">
 						</div>
 						<div class="col-sm-4">
-							<label>Data Emissão</label>
+							<label class="required">Data Emissão</label>
 							<input type="text" class="form-control date" name="txt_dtEmissao_29">
 						</div>
 						<div class="col-sm-4">
-							<label>Data Validade</label>
+							<label class="required">Data Validade</label>
 							<input type="text" class="form-control date" name="txt_dtValidade_29">
 						</div>
 					</div>
 					<div class="row form-input">
 						<div class="col-sm-6">
-							<label>Descrição</label>
+							<label class="required">Descrição</label>
 							<textarea class="form-control" rows="3" name="atxt_descricao_29" placeholder=""
 								data-size="big"></textarea>
 						</div>
 						<div class="col-sm-6">
-							<label>Observação</label>
+							<label class="required">Observação</label>
 							<textarea class="form-control" rows="3" name="atxt_observacoes_29" placeholder=""
 								data-size="big"></textarea>
 						</div>
@@ -2517,7 +2369,7 @@
 						data-target="#devolver_solicitante" href="#devolver_solicitante">
 						<!-- trocar o href,data-target, data-parent -->
 						<span class="flaticon flaticon-message icon-sm"></span>
-						Devolver solicitante
+						Aprovação Gestor Solicitante
 					</a>
 				</h3>
 			</div>
