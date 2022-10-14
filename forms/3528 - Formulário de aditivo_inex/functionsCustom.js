@@ -175,48 +175,54 @@ function hideBlockDivs(divVisivel) {
 	for (i = 0; i < DIVS.length; i++) {
 		// if (DIVS[i] == divVisivel || i == divVisivel) {
 		if($.inArray(DIVS[i], divVisivel)>= 0) {
+			console.log('entrou')
 			hideDivs=true
 			if (FORM_MODE!='VIEW'){
 				$('#' + DIVS[i] + ' .collapse').collapse('show')	
 				continue;
 			}
 		}
-		// $('#' + DIVS[i] + ' button').hide();
-		// $('#' + DIVS[i] + ' textarea').prop('readonly', 'true');
-		// $('#' + DIVS[i] + ' input.form-control[type="text"]').prop('readonly', 'true');
-		// $('#' + DIVS[i] + ' input.form-control[type="number"]').prop('readonly', 'true');
-		// $('#' + DIVS[i] + ' input[type="zoom"]').next().prop("style", "background-color:#f2f2f2")
-		// $('#' + DIVS[i] + ' input[type="zoom"]').parent().prop("style", "pointer-events: none")
-		// $('#' + DIVS[i] + ' select').prop("style", "pointer-events: none; background-color:#f2f2f2")
-		// $('#' + DIVS[i] + ' input:radio:not(:checked)').prop('disabled', 'true');
-		// $('#' + DIVS[i] + ' input:checkbox:not(:checked)').prop('disabled', 'true');
+		$('#' + DIVS[i] + ' button').hide();
+		$('#' + DIVS[i] + ' textarea').prop('readonly', 'true');
+		$('#' + DIVS[i] + ' input.form-control[type="text"]').prop('readonly', 'true');
+		$('#' + DIVS[i] + ' input.form-control[type="number"]').prop('readonly', 'true');
+		$('#' + DIVS[i] + ' input[type="zoom"]').next().prop("style", "background-color:#f2f2f2")
+		$('#' + DIVS[i] + ' input[type="zoom"]').parent().prop("style", "pointer-events: none")
+		$('#' + DIVS[i] + ' select').prop("style", "pointer-events: none; background-color:#f2f2f2")
+		$('#' + DIVS[i] + ' input:radio:not(:checked)').prop('disabled', 'true');
+		$('#' + DIVS[i] + ' input:checkbox:not(:checked)').prop('disabled', 'true');
 
 		if (hideDivs) {
-			// $('#' + DIVS[i]).hide();
+			$('#' + DIVS[i]).hide();
 		}
 	}
 }
 
 function validaCamposRequired(elementoDiv) {
-	// var divSelecionada = $('#' + elementoDiv + ' label.required').next()
-	// for (i = 0; i < divSelecionada.length; i++) {
-	// 	elemento = divSelecionada[i]
-	// 	if ($(elemento).attr('class') == 'radio-options' || $(elemento).attr('class') == 'check-options') {
-	// 		if ($(elemento).find('input:checked').val() == undefined) {
-	// 			elementoName = $(elemento).find('input').attr("name")
-	// 			$('[name="'+elementoName+'"]').focus()
-	// 			msgValidade( elementoName+ ' obrigatório!');
-	// 			break;
-	// 		}
-	// 	} else {
-	// 		if ($(elemento).val() == '' || $(elemento).val() == null) {
-	// 			elementoName = $(elemento).attr("name")
-	// 			$('[name="'+elementoName+'"]').focus()
-	// 			msgValidade( elementoName+ ' obrigatório!'); 
-	// 			break;
-	// 		}
-	// 	}
-	// }
+	var divSelecionada = $('#' + elementoDiv + ' label.required').next()
+	for (i = 0; i < divSelecionada.length; i++) {
+		elemento = divSelecionada[i]
+		if ($(elemento).attr('class') == 'radio-options' || $(elemento).attr('class') == 'check-options') {
+			if ($(elemento).find('input:checked').val() == undefined) {
+				elementoName = $(elemento).find('input').attr("name")
+				$('[name="'+elementoName+'"]').focus()
+				msgValidade( elementoName+ ' obrigatório!');
+				break;
+			}
+		} else {
+			console.log(elemento)
+			if ($(elemento).val() == '' || $(elemento).val() == null) {
+				elementoName = $(elemento).attr("name")
+				$('[name="'+elementoName+'"]').focus()
+				if ($(elemento).attr("class")=='fluig-filter'){
+					msgValidade( 'Campo zoom é obrigatório!'); 
+					break;
+				}
+				msgValidade( elementoName+ ' obrigatório!'); 
+				break;
+			}
+		}
+	}
 }
 
 function loadMasks() {
@@ -240,12 +246,14 @@ function msgsToast(msg, tipo) {
 		type: tipo
 	});
 	if (tipo == 'danger') {
-		throw "Erro! " + msg
+		// throw "Erro! " + msg
 	}
 }
 
 //=========================================================== ASSINATURA ===========================================================
 function customAssinatura(nrPasta, nmArquivo, idDocumento, solicitacao, listaDeAtividades, atividadeResponsaval, tabela, userIds, UserEmails, divValidacao) {
+	console.log(nrPasta,nmArquivo,solicitacao,listaDeAtividades,atividadeResponsaval,tabela,userIds,UserEmails,divValidacao)
+	if (nrPasta==''||nmArquivo==''||idDocumento==''||solicitacao==''||listaDeAtividades==''||atividadeResponsaval==''){msgsToast("ERRO!",'warning');msgValidade("campos vertsign!");throw 'AssinaturaVert'}
 	loading.show()
 	var data = new Date().toLocaleDateString('pt-BR')
 	var hora = new Date().toLocaleTimeString('pt-BR')

@@ -47,9 +47,22 @@ div#div_24 td.col-sm-1 input{
     margin-top: 25px;
 }
 
-td {
-    border-top: solid !important;
-    padding-right: 28px !important;
+/* td { */
+    /* border-top: solid !important;
+    padding-right: 28px !important; */
+/* } */
+
+.table1_02 td, #div_19 td, #div_20 td, #div_21 td,#div_22 td,#div_23 td,#div_24 td{
+    border: none !important;
+}
+
+#div_17 tr {
+    border: solid 2px #002060 !important;
+}
+
+#div_17 fieldset div {
+    max-width: 100%;
+    padding-left: 0.5%;
 }
 
 .row-btns{

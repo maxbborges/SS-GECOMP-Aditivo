@@ -26,6 +26,7 @@ function servicetask208(attempt, message) {
       if (retorno == 201) {
         var msgValidacao = dataset.getValue(0, 'status') + ' - ' + dataset.getValue(0, 'msg');
         addSetTaskComments(idUser, idProcess, msgValidacao);
+        return true;
       } else if (retorno != 201) {
         var msgValidacao = dataset.getValue(0, 'status') + ' - ' + dataset.getValue(0, 'msg');
         var errorMsgManagerApproves = 'Integração Gestor Aprova: ' + msgValidacao;
