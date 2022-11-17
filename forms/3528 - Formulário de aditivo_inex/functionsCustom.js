@@ -170,12 +170,10 @@ function createPdfByForm(listDivsHide, listDivsShow, nrPasta, nrSolicitacao, nmA
 }
 
 //=========================================================== OUTROS ===========================================================
-function hideBlockDivs(divVisivel) {
+function hideBlockDivs(divVisivel,divNaoEditavel) {
 	hideDivs=false
 	for (i = 0; i < DIVS.length; i++) {
-		// if (DIVS[i] == divVisivel || i == divVisivel) {
 		if($.inArray(DIVS[i], divVisivel)>= 0) {
-			console.log('entrou')
 			hideDivs=true
 			if (FORM_MODE!='VIEW'){
 				$('#' + DIVS[i] + ' .collapse').collapse('show')	
@@ -188,12 +186,18 @@ function hideBlockDivs(divVisivel) {
 		$('#' + DIVS[i] + ' input.form-control[type="number"]').prop('readonly', 'true');
 		$('#' + DIVS[i] + ' input[type="zoom"]').next().prop("style", "background-color:#f2f2f2")
 		$('#' + DIVS[i] + ' input[type="zoom"]').parent().prop("style", "pointer-events: none")
+		$('#' + DIVS[i] + ' .zoomField').next().prop("style", "background-color:#f2f2f2")
+		$('#' + DIVS[i] + ' .zoomField').parent().prop("style", "pointer-events: none")
 		$('#' + DIVS[i] + ' select').prop("style", "pointer-events: none; background-color:#f2f2f2")
 		$('#' + DIVS[i] + ' input:radio:not(:checked)').prop('disabled', 'true');
 		$('#' + DIVS[i] + ' input:checkbox:not(:checked)').prop('disabled', 'true');
 
 		if (hideDivs) {
-			$('#' + DIVS[i]).hide();
+			if ($.inArray(DIVS[i], divNaoEditavel)>= 0){
+
+			} else {
+				$('#' + DIVS[i]).hide();
+			}
 		}
 	}
 }

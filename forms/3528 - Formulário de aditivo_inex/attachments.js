@@ -1,42 +1,8 @@
-// GlobalModules = window['GlobalModules'] || {}
-// GlobalModules.fileUpload = (function(){
- 
-// })
 let ATTACHMENT = {
-    // MAP: {
-    //     "Anexo Termo de Referencia Preliminar": {
-    //         uploadBtn: "modeloAnexo",
-    //         relatedContainer: "div_modeloAnexo",
-    //         obj: null
-    //     },
-    // },
     init: function () {
-        // if (ATIVIDADE == 0 || ATIVIDADE == 1){
-        //     setInterval(function () {
-        //         let attachments = parent.ECM.attachmentTable.getData();
-        //         let tamanho = attachments.length;
-        //         if(attachments != null && tamanho > 0){
-        //             console.log(attachments[tamanho-1])
-        //         }
-        //     },2000)
-		// }
-        
-
-//        console.log(GlobalModules)
-//        console.log(parent.ECM.attachmentTable)
-//        console.log(window.parent)
-//        console.log(parent)
-//        console.log(parent.WKFViewAttachment)
-//        console.log(parent.ECM)
-
         $('#abreGED').click(function(){
         	window.parent.$("[data-attachments-load-ged]")[0].click()
         });
-        // window.parent.$('#div-btn-attachment').hide()
-        // window.parent.$('#datatable-area-search').hide()
-        // if (ATIVIDADE != 1 && ATIVIDADE !=19){
-        //     window.parent.$('#dLabel').hide()
-        // }
     },
     showCamera:function (param) {
         var d = new Date();
@@ -70,18 +36,6 @@ let ATTACHMENT = {
             window.parent.$('#workflow-detail-card').removeClass()
             window.parent.$('#workflowview-header .active').removeClass('active').removeClass('out')
         }, 500);
-        
-
-        // $.each(parent.ECM.attachmentTable.getData(), function(i,attachment) {
-        //     var attachmentId = attachment.id;
-        //     var attachmentName = attachment.name;
-        //     console.log(attachmentId)
-        //     console.log(attachmentName)
-        //     console.log(attachment)
-    
-        //     // $('[data-ref="'+ fieldId +'"]').val(attachmentId +" - "+ attachmentName)
-    
-        // })
     },
     view: function(targetDescription) {	
 		$.each(parent.ECM.attachmentTable.getData(), function(i,attachment) {
@@ -111,19 +65,8 @@ let ATTACHMENT = {
             if(description == nmArquivo){
                 let idAnexo = attachment.documentId
                 $(fieldDestino).val(idAnexo);
-                console.log('entrouAqui')
 	        	return;
 	        }
         });
-        // var docs = hAPI.listAttachments();
-        // console.log(docs)
-        // for (var i = 0; i < docs.size(); i++) {
-        //     var doc = docs.get(i);
-        //     var dsAnexo = doc.getDocumentDescription();
-        //     if (dsAnexo==nmArquivo){
-        //         var idAnexo = doc.getDocumentId();
-        //         hAPI.setCardValue(fieldDestino,idAnexo);
-        //     }
-        // }
     }
 }

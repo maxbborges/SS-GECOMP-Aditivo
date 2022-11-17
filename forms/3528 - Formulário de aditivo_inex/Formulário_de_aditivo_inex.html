@@ -1691,7 +1691,7 @@
 						<tbody>
 							<tr class="tableBodyRow form-input">
 								<td>
-									
+
 									<div class="form-input row">
 										<div class="col-sm-1 fs-no-padding-right">
 											<label>Item</label>
@@ -1911,11 +1911,8 @@
 									<tbody>
 										<tr class="tableBodyRow form-input row">
 											<td class="col-sm-3">
-												<div class="form-input">
-													<label>Contrato</label>
-													<input type="text" name="txt_19_contrato" class="form-control"
-														readonly>
-												</div>
+												<label>Contrato</label>
+												<input type="text" name="txt_19_contrato" class="form-control" readonly>
 											</td>
 											<td class="col-sm-2">
 												<label>Filial</label>
@@ -1966,6 +1963,10 @@
 								</thead>
 								<tbody>
 									<tr class="tableBodyRow form-input row">
+										<!-- <td class="col-sm-1">
+											<label>Filial</label>
+											<input type="text" name="txt_19_entidade" class="form-control" readonly>
+										</td> -->
 										<td class="col-sm-1">
 											<label>Item</label>
 											<input type="text" name="column1_5" class="form-control" readonly>
@@ -1978,7 +1979,7 @@
 											<label>Descrição</label>
 											<input type="text" name="column3_5" class="form-control" readonly>
 										</td>
-										<td class="col-sm-2">
+										<td class="col-sm-1">
 											<label>Quantidade</label>
 											<input type="text" name="column4_5" class="form-control">
 										</td>
@@ -2034,23 +2035,23 @@
 										</thead>
 										<tbody>
 											<tr class="tableBodyRow form-input row">
-												<td class="col-sm-3">
+												<td class="col-sm-2">
 													<label>Contrato</label>
 													<input type="text" name="txt_20_contrato" class="form-control"
 														readonly>
 												</td>
-												<td class="col-sm-3">
+												<td class="col-sm-1">
 													<label>Filial</label>
 													<input type="text" name="txt_20_filial" class="form-control"
 														readonly>
 												</td>
-												<td class="col-sm-3">
-													<label>Data do Reajuste</label>
-													<input type="text" name="txt_dtReajuste_20" class="form-control">
+												<td class="col-sm-4">
+													<label><b>Data Do Reajuste:</b> data da proposta (ano anterior)</label>
+													<input type="text" name="txt_dtReajuste_20" class="form-control date">
 												</td>
-												<td class="col-sm-3">
-													<label>Referência do Reajuste</label>
-													<input type="text" name="txt_refReajuste_20" class="form-control">
+												<td class="col-sm-5">
+													<label><b>Ref. Do Reajuste:</b> data com o mês do Índice utilizado (ano corrente)</label>
+													<input type="text" name="txt_refReajuste_20" class="form-control date">
 												</td>
 											</tr>
 										</tbody>
@@ -2081,6 +2082,10 @@
 								</thead>
 								<tbody>
 									<tr class="tableBodyRow form-input row">
+										<!-- <td class="col-sm-1">
+											<label>Filial</label>
+											<input type="text" name="txt_20_entidade" class="form-control" readonly>
+										</td> -->
 										<td class="col-sm-1">
 											<label>Item</label>
 											<input type="text" name="column1_6" class="form-control" readonly>
@@ -2283,7 +2288,11 @@
 									<tr class="tableBodyRow form-input">
 										<td>
 											<div class="row">
-												<div class="col-sm-4">
+												<!-- <td class="col-sm-1">
+													<label>Filial</label>
+													<input type="text" name="txt_22_entidade" class="form-control" readonly>
+												</td> -->
+												<div class="col-sm-3">
 													<label>Num</label>
 													<input type="text" name="column1_7" class="form-control" readonly>
 												</div>

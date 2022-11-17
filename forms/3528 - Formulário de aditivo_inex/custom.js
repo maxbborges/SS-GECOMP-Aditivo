@@ -1,13 +1,5 @@
 let loading = FLUIGC.loading(window);
 $(document).ready(function () {
-    // setTimeout(() => {
-    //     // dados=$('.title-form-application').nextAll('[type="hidden"]')
-    //     dados = $("input[type='hidden']")
-    //     for (i = 0; i < dados.length; i++) {
-    //         dados[i].type = 'text'
-
-    //     }
-    // }, 500);
     loadHideShow();
     loadClicks();
     loadChange();
@@ -18,34 +10,19 @@ $(document).ready(function () {
     }, 300);
 
     $('.labelHidden').hide()
-
-
-
-
     exibirDivsHidden()
 });
 
 function loadHideShow() {
     //    window.parent.$('#div-btn-attachment').hide()
 
-    if (($('[tablename="tbl_notaTecnica_02"] tbody').children()).length < 2) {
-        $('[tablename="tbl_notaTecnica_02"]').hide()
-    }
-
-    if (($('[tablename="tbl_pesquisa_06"] tbody').children()).length < 2) {
-        $('[tablename="tbl_pesquisa_06"]').hide()
-    }
-
     if (ATIVIDADE == ACTIVITY.INICIO || ATIVIDADE == ACTIVITY.ZERO) {
         $('[name="slc_fornecedor_associar"]').parent().hide()
         $('[name="txt_fornecedor_associar_00"]').hide()
-    } else {
-        $('[name="rd_tipoContratacao_02"]').prop('readonly', true);
     }
 
     if (ATIVIDADE == ACTIVITY.PREPARAR_ADITIVO) {
         $('[name="txt_nProc"]').val(nProcesso)
-        // $('[name="rd_entidade_02"]:not(:checked)').prop('disabled', 'true');
     } else {
         if (FORM_MODE == 'MOD') {
             $('[tablename="tbl_notaTecnica_02"] tbody td:first-child').hide()
@@ -111,20 +88,16 @@ function loadClicks() {
         if (nprocessoAnterior == null || nprocessoAnterior == '') { loading.hide(); msgsToast("Necessário digitar algum processo para buscar!", 'warning'); return }
         else {
             var params = [{ name: "txt_numProtocolo", value: nprocessoAnterior }, { name: "metadata#active", value: true }]
-            // datasetSolicitacoes = customDataset("ds_solicitacaoDeCompras", params, [], [], null)
             var datasetSolicitacoes = customDataset("solicitacao_compras_inex_vanat", params, [], [], null)
+            var tamanhoDataset = datasetSolicitacoes.length - 1
 
-            for (var i = 0; i < datasetSolicitacoes.length; i++) {
-                console.log(datasetSolicitacoes[i])
-                var documentId = datasetSolicitacoes[i]["metadata#id"];
-                var documentVersion = datasetSolicitacoes[i]["metadata#version"];
-                var descricaoDocContrato = datasetSolicitacoes[i]['descricaoDocContrato']
-            }
+            if (tamanhoDataset == -1) { loading.hide(); msgsToast("Processo não encontrado!", 'warning'); return }
 
+            var documentId = datasetSolicitacoes[tamanhoDataset]["metadata#id"];
+            var documentVersion = datasetSolicitacoes[tamanhoDataset]["metadata#version"];
+            var descricaoDocContrato = datasetSolicitacoes[tamanhoDataset]['descricaoDocContrato']
             var params = [{ name: "tablename", value: 'tableContrato' }, { name: "metadata#id", value: documentId }, { name: "metadata#version", value: documentVersion }]
             var datasetFilhos = customDataset("solicitacao_compras_inex_vanat", params, [], [], null)
-            // console.log(datasetFilhos)
-            // return
 
             var listaNContratos = []
             var listaScs = []
@@ -135,33 +108,6 @@ function loadClicks() {
                 listaScs.push(datasetFilhos[i]['txt_SCDoContratoRetorno']);
             }
             $(slc_fornecedor_associar).parent().show()
-
-            if (datasetSolicitacoes.length == 0) { loading.hide(); msgsToast("Processo não encontrado!", 'warning'); return }
-            for (i = 0; i < datasetSolicitacoes.length; i++) {
-
-                // if (datasetFilhos[i]['descricaoFornecRet'] == '' || datasetFilhos[i]['descricaoFornecRet'] == null) {
-                //     msgsToast('Erro ao buscar fornecedores: ds_solicitacaoDeCompras', 'warning');
-                //     loading.hide()
-                //     // return;
-                // }
-
-                // if (tempFornec.indexOf(datasetFilhos[i]['descricaoFornecRet']) == -1) {
-                //     tempFornec.push(datasetFilhos[i]['descricaoFornecRet']);
-
-                //     $(slc_fornecedor_associar).append(
-                //         $('<option>', {
-                //             value: datasetFilhos[i]['descricaoFornecRet'],
-                //             text: datasetFilhos[i]['descricaoFornecRet']
-                //         })
-                //     );
-                // }
-
-                // $('[name="txt_codFilialAnterior"]').val(datasetSolicitacoes[i].cdFilial)
-                // $('[name="txt_nContratoAnterior"]').val(datasetSolicitacoes[i].txt_numeroDoContratoRetorno)
-                // $('[name="atxt_obj_17"]').val(datasetSolicitacoes[i].descricaoDocContrato)
-                // $('[name="txt_entidade_17"]').val(datasetSolicitacoes[i].cdFilial)
-            }
-            // loadDatasets(datasetSolicitacoes[0].cdFilial, datasetSolicitacoes[0].txt_numSc);
             loadDatasets(listaFiliais, listaScs, listaNContratos, descricaoDocContrato);
         }
     });
@@ -279,7 +225,8 @@ function loadClicks() {
         var valorUnitario = $('[name="txt_ValUnitario_06"]').val()
         var valorTotal = $('[name="txt_valorTotal_06"]').val()
         var descricao = $('[name="atxt_descricao_06"]').val()
-        if ('a' == 'b') {
+        if (cnpj=='' || razaoSocial == '' || valorUnitario=='' || valorTotal=='' || descricao=='') {
+            loading.hide(); msgsToast("Necessário preencher campos obrigatórios!", 'warning'); return;
         } else {
             wdkAddChild('tbl_pesquisa_06')
             $('[tablename="tbl_pesquisa_06"]').show()
@@ -423,7 +370,6 @@ function loadChange() {
             $($('#div_30_terminarAditivo').find('label')[0]).addClass('required')
         }
         else {
-            // $('#div_tipoAditivo_30').hide();$('#div_30_terminarAditivo').hide()
             $('#div_tipoAditivo_30').find('label').removeClass('required')
             $($('#div_30_terminarAditivo').find('label')[0]).removeClass('required')
         }
@@ -442,12 +388,6 @@ function loadChange() {
                 $(labels[i]).addClass('required')
             }
         }
-
-        // if (conteudo == 'div_19') {
-
-            // contrato = consultaContrato()
-            // $('[name="txt_vigencia_19"]').val(contrato.CN9_VIGE) // 001
-        // }
     });
 }
 
@@ -475,8 +415,7 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
     var listaDeGpAprovacao = {}
     listaFornecedores = []
 
-    var datasetListaFornecedores = customDataset('ds_consulta_fornecedor', [], [], []);
-    console.log(datasetListaFornecedores)
+    // var datasetListaFornecedores = customDataset('ds_consulta_fornecedor', [], [], []);
 
     var gpAprovacao = customDataset('ds_consulta_grupo_aprovacao', [], [], []);
     for (i = 0; i < gpAprovacao.length; i++) {
@@ -493,7 +432,6 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
         wdkAddChild("tbl_23_010");
         wdkAddChild("tbl_24_012");
         wdkAddChild('tableValoresContrato')
-
 
         var contrato = consultaContrato(nContratos[i], listaFiliais[i])
         var numeroContrato = contrato.CN9_NUMERO
@@ -525,7 +463,6 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
         $('[name="txt_23_filial___' + num + '"]').val(filial)
         $('[name="txt_24_contrato___' + num + '"]').val(numeroContrato)
         $('[name="txt_24_filial___' + num + '"]').val(filial)
-        // $('[name="txt_19_vigencia2"]').val(contrato.CN9_VIGE)
 
         fornecedores = JSON.parse(contrato.fornecedores);
         for (var x = 0; x < fornecedores.length; x++) {
@@ -551,18 +488,15 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
 
         var constraints = [{ name: "C1_FILIAL", value: filial }, { name: "C1_NUM", value: listaSCs[i] }]
         var datasetSC = customDataset('ds_busca_solicitacao_compras', constraints, [], []);
-        console.log(datasetSC)
 
         var constraints = [{ name: "numeroContrato", value: numeroContrato }]
         var datasetRevisao = customDataset('ds_field_revisao', constraints, [], []);
-        console.log(datasetRevisao)
 
         if (datasetRevisao.length > 0 && datasetRevisao[0].CN9_REVISA != '') { $('[name="txt_revisao_19___' + num + '"]').val(datasetRevisao[0].CN9_REVISA) } // 001
         else { $('[name="txt_revisao_19___' + num + '"]').val('000') }// 001
 
         var constraints = [{ name: "numeroContrato", value: numeroContrato }, { name: "filial", value: filial }]
         var datasetAdicionais = customDataset('ds_campos_contrato_protheus', constraints, [], []);
-        console.log(datasetAdicionais)
 
         $('[name="txt_valor_inicial___' + num + '"]').maskMoney({ thousands: '.', decimal: ',', prefix: 'R$ ' }).maskMoney('mask', datasetAdicionais[0].CN9_VLINI)
         $('[name="txt_valor_atual___' + num + '"]').maskMoney({ thousands: '.', decimal: ',', prefix: 'R$ ' }).maskMoney('mask', datasetAdicionais[0].CN9_VLATU)
@@ -572,16 +506,6 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
 
         var constraints = [{ name: "C_CHAVE", value: numeroContrato }, { name: "REVISAO", value: datasetRevisao[0].CN9_REVISA }, { name: "C_FILIAL", value: filial }]
         var datasetItensContrato = customDataset('ds_itens_contrato_protheus', constraints, [], []);
-        console.log(datasetItensContrato)
-
-        // if (filial == '010001') { 
-        //     $('[name="siglaFilial___' + num + '"]').html('SEST') 
-        //     $('[name="cbox_02_entidade_sest"]').prop('checked', true);
-        // }
-        // else { 
-        //     $('[name="siglaFilial___' + num + '"]').html('SENAT') 
-        //     $('[name="cbox_02_entidade_senat"]').prop('checked', true);
-        // }
 
         for (var x = 0; x < datasetItensContrato.length; x++) {
             var idProduto = wdkAddChild("tbl_17_itensContrato");
@@ -590,35 +514,23 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
             wdkAddChild("tbl_001_19");
 
             produto = Object.assign({}, datasetSC[0], datasetItensContrato[x]);
-            console.log(produto)
 
             $('#C1_FILIAL___' + idProduto).val(produto.C1_FILIAL)
-
             $('#CNB_ITEM___' + idProduto).val(produto.CNB_ITEM)
             $('#CNB_PRODUT___' + idProduto).val(produto.CNB_PRODUT).prop('readonly', true);
             $('#CNB_DESCRI___' + idProduto).val(produto.CNB_DESCRI).prop('readonly', true);
             $('#CNB_VLUNIT___' + idProduto).val(produto.CNB_VLUNIT).prop('readonly', true);
             $('#CNB_VLTOT___' + idProduto).val(produto.CNB_VLTOT).prop('readonly', true);
-
             $('#C1_CLVL___' + idProduto).val(produto.C1_CLVL)
             $('#C1_CC___' + idProduto).val(produto.C1_CC)
             $('#C1_EC06DB___' + idProduto).val(produto.C1_EC06DB)
             $('#C1_EC07DB___' + idProduto).val(produto.C1_EC07DB)
             $('#C1_CONTA___' + idProduto).val(produto.C1_CONTA)
             $('#C1_EC08DB___' + idProduto).val(produto.C1_EC08DB)
-
-
             $('#CNB_UM___' + idProduto).val(produto.CNB_UM).prop('readonly', true);
             $('#CNB_QUANT___' + idProduto).val(produto.CNB_QUANT).prop('readonly', true);
             $('#CNB_QTDMED___' + idProduto).val(produto.CNB_QTDMED).prop('readonly', true);
             $('#CNB_SLDMED___' + idProduto).val(produto.CNB_SLDMED).prop('readonly', true);
-
-
-
-
-            
-            // let tpl = Mustache.render($("#tpl_contrato_produtos").html(), produto);
-            // $('#produtosContrato___' + num).append(tpl);
 
             $('#column1_5___' + idProduto).val(produto.CNB_ITEM).prop('readonly', true);
             $('#column2_5___' + idProduto).val(produto.CNB_PRODUT).prop('readonly', true);
@@ -639,62 +551,13 @@ function loadDatasets(listaFiliais, listaSCs, nContratos, descricaoDocContrato) 
             $('#column5_7___' + idProduto).val(produto.CNB_SLDMED).prop('readonly', true);
             $('#column6_7___' + idProduto).val(produto.CNB_VLUNIT).prop('readonly', true);
             $('#column7_7___' + idProduto).val(produto.CNB_VLTOT).prop('readonly', true);
+
+            // $('#txt_19_entidade___' + idProduto).val(filial).prop('readonly', true);
+            // $('#txt_20_entidade___' + idProduto).val(filial).prop('readonly', true);
+            // $('#txt_22_entidade___' + idProduto).val(filial).prop('readonly', true);
         }
 
     }
-
-    // if (datasetSC.length > 0) {
-    //     for (i = 0; i < datasetSC.length; i++) {
-    //         var idProduto = wdkAddChild("tbl_dadosContrato_17");
-    //         let produto1 = datasetSC[i];
-    //         let produto2 = datasetItensContrato[i]
-
-    //         wdkAddChild("tbl_008_22");
-    //         wdkAddChild("tbl_003_20");
-    //         wdkAddChild("tbl_001_19");
-
-    //         $('#column1_3___' + idProduto).val(produto2.CNB_ITEM).prop('readonly', true);
-    //         $('#column2_3___' + idProduto).val(produto2.CNB_PRODUT).prop('readonly', true);
-    //         $('#column3_3___' + idProduto).val(produto2.CNB_DESCRI).prop('readonly', true);
-    //         $('#column4_3___' + idProduto).val(produto2.CNB_UM).prop('readonly', true);
-    //         $('#column5_3___' + idProduto).val(produto2.CNB_QUANT).prop('readonly', true);
-    //         $('#column6_3___' + idProduto).val(produto2.CNB_VLUNIT).prop('readonly', true);
-    //         $('#column7_3___' + idProduto).val(produto2.CNB_VLTOT).prop('readonly', true);
-    //         $('#column8_3___' + idProduto).val(produto1.C1_CLVL).prop('readonly', true);
-    //         $('#column9_3___' + idProduto).val(produto1.C1_CC).prop('readonly', true);
-    //         $('#column10_3___' + idProduto).val(produto1.C1_EC06DB).prop('readonly', true);
-    //         $('#column11_3___' + idProduto).val(produto1.C1_EC07DB).prop('readonly', true);
-    //         $('#column12_3___' + idProduto).val(produto1.C1_CONTA).prop('readonly', true);
-    //         $('#column13_3___' + idProduto).val(produto1.C1_EC08DB).prop('readonly', true);
-    //         $('#column14_3___' + idProduto).val(produto2.CNB_QTDMED).prop('readonly', true);
-    //         $('#column15_3___' + idProduto).val(produto2.CNB_SLDMED).prop('readonly', true);
-
-    //         $('#column1_5___' + idProduto).val(produto2.CNB_ITEM).prop('readonly', true);
-    //         $('#column2_5___' + idProduto).val(produto2.CNB_PRODUT).prop('readonly', true);
-    //         $('#column3_5___' + idProduto).val(produto2.CNB_DESCRI).prop('readonly', true);
-    //         $('#column4_5___' + idProduto).val(produto2.CNB_QUANT).prop('readonly', true);
-    //         $('#column5_5___' + idProduto).val(produto2.CNB_SLDMED).prop('readonly', true);
-
-    //         $('#column1_6___' + idProduto).val(produto2.CNB_ITEM).prop('readonly', true);
-    //         $('#column2_6___' + idProduto).val(produto2.CNB_PRODUT).prop('readonly', true);
-    //         $('#column3_6___' + idProduto).val(produto2.CNB_DESCRI).prop('readonly', true);
-    //         $('#column4_6___' + idProduto).val(produto2.CNB_QUANT).prop('readonly', true);
-    //         $('#column5_6___' + idProduto).val(produto2.CNB_SLDMED).prop('readonly', true);
-
-    //         $('#column1_7___' + idProduto).val(produto2.CNB_ITEM).prop('readonly', true);
-    //         $('#column2_7___' + idProduto).val(produto2.CNB_PRODUT).prop('readonly', true);
-    //         $('#column3_7___' + idProduto).val(produto2.CNB_DESCRI).prop('readonly', true);
-    //         $('#column4_7___' + idProduto).val(produto2.CNB_QUANT).prop('readonly', true);
-    //         $('#column5_7___' + idProduto).val(produto2.CNB_SLDMED).prop('readonly', true);
-    //         $('#column6_7___' + idProduto).val(produto2.CNB_VLUNIT).prop('readonly', true);
-    //         $('#column7_7___' + idProduto).val(produto2.CNB_VLTOT).prop('readonly', true);
-    //     }
-    //     loading.hide()
-    // } else {
-    //     loading.hide()
-    //     msgsToast("Processo não encontrado!", 'danger')
-    //     return
-    // }
     loading.hide()
 }
 
@@ -703,45 +566,33 @@ function formataDataBr(data) {
     return data.substr(6, 2) + '/' + data.substr(4, 2) + '/' + data.substr(0, 4);
 }
 
-// function selecionarFornecedor(elemento) {
-//     fornecedorSelecionado = $(elemento).val()
-//     console.log(fornecedorSelecionado)
-
-//     radios = $("#div_24 td [type='radio']")
-//     for (i = 1; i < radios.length; i++) {
-//         if (i != fornecedorSelecionado) {
-//             radios[i].checked = false
-//         }
-//     }
-// }
-
 function loadCollapse() {
     if (FORM_MODE == 'VIEW') {
         $('#div_00 .collapse').collapse('show')
     }
 
-    if (ATIVIDADE == ACTIVITY.ZERO || ATIVIDADE == ACTIVITY.INICIO) { hideBlockDivs(['div_00']); }
-    else if (ATIVIDADE == ACTIVITY.PREPARAR_ADITIVO) { hideBlockDivs(['div_01', 'div_02', 'div_27']) }// DIV_01, DIV_02, DIV_27
-    else if (ATIVIDADE == ACTIVITY.APROVAR_SOLICITACAO) { hideBlockDivs(['div_03']) }// DIV_03
-    else if (ATIVIDADE == ACTIVITY.ANALISAR_VANTAJOSIDADE) { hideBlockDivs(['div_04']) }// DIV_04
-    else if (ATIVIDADE == ACTIVITY.APROVAR_VANTAJOSIDADE) { hideBlockDivs(['div_05']) }// DIV_05
-    else if (ATIVIDADE == ACTIVITY.FAZER_PESQUISA_PRECO) { hideBlockDivs(['div_06']) }// DIV_06
-    else if (ATIVIDADE == ACTIVITY.FAZER_NOTA_TECNICA) { hideBlockDivs(['div_07']) }// DIV_07
-    else if (ATIVIDADE == ACTIVITY.APROVACAO_GERENCIA) { hideBlockDivs(['div_28']) }// DIV_28
-    else if (ATIVIDADE == ACTIVITY.DISTRIBUIR_PROCESSO) { hideBlockDivs(['div_08']) }// DIV_08
-    else if (ATIVIDADE == ACTIVITY.ANALISE_PREVIA) { hideBlockDivs(['div_09']) }// DIV_09
-    else if (ATIVIDADE == ACTIVITY.ELABORAR_PARECER_JURIDICO) { hideBlockDivs(['div_10']) }// DIV_10
-    else if (ATIVIDADE == ACTIVITY.REVISAR_PARECER_JURIDICO) { hideBlockDivs(['div_12']) }// DIV_12
-    else if (ATIVIDADE == ACTIVITY.APROVAR_COORDENADOR) { hideBlockDivs(['div_13']) }// DIV_13
-    else if (ATIVIDADE == ACTIVITY.APROVAR_ASSESSOR) { hideBlockDivs(['div_14']) }// DIV_14
-    else if (ATIVIDADE == ACTIVITY.CADASTRAR_EMPRESA_VERTSIGN) { hideBlockDivs(['div_15']); }// DIV_15
+    if (ATIVIDADE == ACTIVITY.ZERO || ATIVIDADE == ACTIVITY.INICIO) { hideBlockDivs(['div_00'],[]); }
+    else if (ATIVIDADE == ACTIVITY.PREPARAR_ADITIVO) { hideBlockDivs(['div_01', 'div_02', 'div_27'],[]) }// DIV_01, DIV_02, DIV_27
+    else if (ATIVIDADE == ACTIVITY.APROVAR_SOLICITACAO) { hideBlockDivs(['div_03'],[]) }// DIV_03
+    else if (ATIVIDADE == ACTIVITY.ANALISAR_VANTAJOSIDADE) { hideBlockDivs(['div_04'],[]) }// DIV_04
+    else if (ATIVIDADE == ACTIVITY.APROVAR_VANTAJOSIDADE) { hideBlockDivs(['div_05'],[]) }// DIV_05
+    else if (ATIVIDADE == ACTIVITY.FAZER_PESQUISA_PRECO) { hideBlockDivs(['div_06'],[]) }// DIV_06
+    else if (ATIVIDADE == ACTIVITY.FAZER_NOTA_TECNICA) { hideBlockDivs(['div_07'],[]) }// DIV_07
+    else if (ATIVIDADE == ACTIVITY.APROVACAO_GERENCIA) { hideBlockDivs(['div_28'],[]) }// DIV_28
+    else if (ATIVIDADE == ACTIVITY.DISTRIBUIR_PROCESSO) { hideBlockDivs(['div_08'],[]) }// DIV_08
+    else if (ATIVIDADE == ACTIVITY.ANALISE_PREVIA) { hideBlockDivs(['div_09'],[]) }// DIV_09
+    else if (ATIVIDADE == ACTIVITY.ELABORAR_PARECER_JURIDICO) { hideBlockDivs(['div_10'],[]) }// DIV_10
+    else if (ATIVIDADE == ACTIVITY.REVISAR_PARECER_JURIDICO) { hideBlockDivs(['div_12'],[]) }// DIV_12
+    else if (ATIVIDADE == ACTIVITY.APROVAR_COORDENADOR) { hideBlockDivs(['div_13'],[]) }// DIV_13
+    else if (ATIVIDADE == ACTIVITY.APROVAR_ASSESSOR) { hideBlockDivs(['div_14'],[]) }// DIV_14
+    else if (ATIVIDADE == ACTIVITY.CADASTRAR_EMPRESA_VERTSIGN) { hideBlockDivs(['div_15'],[]); }// DIV_15
     else if (ATIVIDADE == ACTIVITY.CADASTRAR_NO_PROTHEUS) {
         hideBlockDivs(['div_17', 'div_18',
-            'div_30', 'div_19', 'div_20', 'div_21', 'div_22', 'div_23', 'div_24'])
+            'div_30', 'div_19', 'div_20', 'div_21', 'div_22', 'div_23', 'div_24'],[])
     }// DIV_17, DIV_18, DIV_30
-    else if (ATIVIDADE == ACTIVITY.INCLUIR_DOCUMENTO) { hideBlockDivs(['div_29']) }
-    else if (ATIVIDADE == ACTIVITY.REVISAR_CADASTRO) { hideBlockDivs(['div_26']) }
-    else if (ATIVIDADE == ACTIVITY.DEVOLVER_SOLICITANTE) { hideBlockDivs(['div_25']) }
+    else if (ATIVIDADE == ACTIVITY.INCLUIR_DOCUMENTO) { hideBlockDivs(['div_29'],[]) }
+    else if (ATIVIDADE == ACTIVITY.REVISAR_CADASTRO) { hideBlockDivs(['div_26'],[]) }
+    else if (ATIVIDADE == ACTIVITY.DEVOLVER_SOLICITANTE) { hideBlockDivs(['div_25'],[]) }
 
     if (ATIVIDADE != ACTIVITY.INICIO && ATIVIDADE != ACTIVITY.ZERO) {
         $('[name="slc_fornecedor_associar"]').hide()
@@ -810,36 +661,10 @@ function loadZooms() {
 
         msgsToast('Filial selecionada: ' + data.item.A2_NOME, 'success')
     });
-
-    // header = [
-    //     { 'title': 'CN6_CODIGO', 'size': 'col-xs-3' },
-    //     { 'title': 'CN6_DESCRI', 'size': 'col-xs-9', 'standard': true }
-    // ]
-    // var filter3 = createFilterZoom('ds_consulta_indice', [], [], [], 'CN6_DESCRI', false, 'Escolha o índice', header, ['CN6_CODIGO', 'CN6_DESCRI'], '[name="zf_indice_21"]')
-
-    // filter3.on('fluig.filter.item.added', function (data) {
-    //     $("[name='txt_zf_indice']").val(data.item.CN6_CODIGO)
-
-    //     msgsToast('Índice selecionado: ' + data.item.CN6_DESCRI, 'success')
-    // });
-
-    // header = [
-    //     { 'title': 'AL_DESC', 'size': 'col-xs-3' },
-    //     { 'title': 'AL_USER', 'size': 'col-xs-9', 'standard': true },
-    //     { 'title': 'AL_COD', 'size': 'col-xs-9', 'visible': false }
-    // ]
-    // var filter4 = createFilterZoom('ds_consulta_grupo_aprovacao', [], [], [], 'AL_DESC', false, 'Escolha o grupo', header, ['AL_DESC', 'AL_USER', 'AL_COD'], '[name="zf_gpAtual_23"]')
-
-    // filter4.on('fluig.filter.item.added', function (data) {
-    //     $("[name='txt_zf_grupoAprovador']").val(data.item.AL_COD)
-
-    //     msgsToast('Aprovador selecionado: ' + data.item.AL_DESC, 'success')
-    // });
 }
 
 function selectTipoAditivo30(elemento) {
     var conteudo = $(elemento).val()
-    console.log(conteudo)
     hideTiposAditivo()
     if (conteudo == '') { return }
     $('#' + conteudo + ' .panel-collapse.collapse').addClass('in')
@@ -851,13 +676,6 @@ function selectTipoAditivo30(elemento) {
             $(labels[i]).addClass('required')
         }
     }
-
-    // if (conteudo == 'div_19') {
-    //     var contrato = consultaContrato($('[name="txt_19_contrato1"]').val(), $('[name="txt_19_filial1"]').val())
-    //     var contrato2 = consultaContrato($('[name="txt_19_contrato2"]').val(), $('[name="txt_19_filial2"]').val())
-    //     $('[name="txt_vigencia_19"]').val(contrato.CN9_VIGE)
-    //     $('[name="txt_19_vigencia2"]').val(contrato2.CN9_VIGE)
-    // }
 }
 
 var beforeSendValidate = function (numState, nextState) {
@@ -924,16 +742,7 @@ var beforeSendValidate = function (numState, nextState) {
         customAssinatura(nrPasta, nmArquivo, idDoc, nProcesso, atvCaptura, atvResponsavel, tabela, [], [], valid)
     }
     else if (numState == ACTIVITY.CADASTRAR_NO_PROTHEUS) {
-        // console.log()
-        validaCamposRequired($('[name="rd_tipoAditivo_30"]').val());
-        // validaCamposRequired('div_18');
-        // validaCamposRequired('div_30');
-        // validaCamposRequired('div_19');
-        // validaCamposRequired('div_20');
-        // validaCamposRequired('div_21');
-        // validaCamposRequired('div_22');
-        // validaCamposRequired('div_23');
-        // validaCamposRequired('div_24');
+        // validaCamposRequired($('[name="rd_tipoAditivo_30"]').val());
     }
     else if (numState == ACTIVITY.INCLUIR_DOCUMENTO) { validaCamposRequired('div_29'); }
     else if (numState == ACTIVITY.REVISAR_CADASTRO) { validaCamposRequired('div_26'); }
