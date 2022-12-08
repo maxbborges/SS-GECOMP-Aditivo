@@ -194,7 +194,7 @@ function hideBlockDivs(divVisivel,divNaoEditavel) {
 
 		if (hideDivs) {
 			if ($.inArray(DIVS[i], divNaoEditavel)>= 0){
-
+				$('#' + DIVS[i] + ' .collapse').collapse('show')
 			} else {
 				$('#' + DIVS[i]).hide();
 			}

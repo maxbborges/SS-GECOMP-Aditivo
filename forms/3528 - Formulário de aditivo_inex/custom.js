@@ -756,3 +756,7 @@ class ExibirMensagem {
         "</div><i class='fluigicon fluigicon-tag icon-sm'></i> <font style='font-weight: bold'>Dúvidas?</font> Entre em contato com o departamento de TI.";
     }
 }
+
+function setSelectedZoomItem(selectedItem) {
+    
+}
